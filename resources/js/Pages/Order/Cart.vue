@@ -1,7 +1,7 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div class="bg-white p-6 rounded-lg shadow-xl w-96 max-w-lg">
-      <h2 class="text-2xl font-semibold mb-4">Keranjang Belanja</h2>
+      <p v-if="cart.length == 0" class=" text-gray-500 fw-light">Anda belum memasukkan pesanan apapun ke dalam keranjang !</p>
 
       <!-- Daftar Item di Keranjang -->
       <ul class="space-y-4">
@@ -22,12 +22,24 @@
       </div>
 
       <!-- Tombol untuk Tutup Modal -->
-      <div class="mt-4 flex justify-end space-x-4">
+      <div class="mt-4 flex space-x-4">
         <button 
           @click="closeCart" 
           class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition duration-200"
         >
           Tutup
+        </button>
+        <button 
+          @click="checkout" 
+          class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition duration-200"
+        >
+          Checkout
+        </button>
+        <button
+          @click="clear()" 
+          class="pl-20 ml-5 py-2 text-dark rounded-lg hover:text-red-800 transition duration-200"
+        >
+          Clear
         </button>
       </div>
     </div>
@@ -61,11 +73,13 @@ export default {
     // Menutup modal
     closeCart() {
       this.$emit('close-cart');  // Emit event untuk menutup modal
-    },
+      },
+      checkout() {
+      this.$emit('checkout'); // Emit event untuk melakukan checkout
+      },
+      clear() {
+        this.$emit('clear')
+    }
   }
 };
 </script>
-
-<style scoped>
-/* Add additional styles if needed */
-</style>
