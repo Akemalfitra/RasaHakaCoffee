@@ -20,7 +20,7 @@ use App\Http\Controllers\ProfileController;
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/menu', [MenuController::class, 'getMenu'])
+Route::get('/', [MenuController::class, 'getMenu'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

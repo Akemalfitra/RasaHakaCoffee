@@ -3,38 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     public function store(Request $request)
     {
-        dd($request);
-        // Validasi data cart
-        $request->validate([
-            'cart' => 'required|array',
-            'cart.*.id' => 'required|integer',
-            'cart.*.name' => 'required|string',
-            'cart.*.price' => 'required|numeric',
+      
+    // Validasi input
+    $request->validate([
+        'userId' => 'required|exists:users,id',
+        'cart' => 'required|array',
+        'cart.*.productId' => 'required|exists:products,id',  // Validasi productId yang valid
+        'cart.*.quantity' => 'required|integer|min:1',
+        'jumlah' => 'required|integer|min:0',
+    ]);
+
+    // Buat order baru
+    $order = Orders::create([
+        'user_id' => $request->input('userId'),  // Ambil userId dari request
+        'jumlah' => $request->input('jumlah'),   // Ambil jumlah total dari request
+    ]);
+
+    // Insert item ke tabel order_items
+    foreach ($request->input('cart') as $cartItem) {
+        OrderItem::create([
+            'order_id' => $order->id,
+            'product_id' => $cartItem['productId'],  // Gunakan 'product_id' sesuai konvensi Laravel
+            'quantity' => $cartItem['quantity'],
         ]);
+    }
 
-        // Menyimpan order
-        // $order = Order::create([
-        //     'total' => collect($request->cart)->sum('price'),
-        //     'status' => 'pending',
-        // ]);
-
-        // // Menyimpan order items
-        // foreach ($request->cart as $item) {
-        //     OrderItem::create([
-        //         'order_id' => $order->id,
-        //         'product_id' => $item['id'],
-        //         'name' => $item['name'],
-        //         'price' => $item['price'],
-        //     ]);
-        // }
-
-        // Mengembalikan respons sukses
-        return response()->json(['success' => true]);
+    return response()->json([
+        'message' => 'Order berhasil dibuat',
+        'order' => $order
+    ], 201);
     }
 }

@@ -6,12 +6,14 @@
       <!-- Daftar Item di Keranjang -->
       <ul class="space-y-4">
         <li v-for="(item, index) in cart" :key="item.id" class="flex justify-between items-center">
-          <span>{{ item.nama }} - Rp. {{ item.harga }}</span>
+          <span>{{ item.nama }} - Rp. {{ item.harga }} - x{{ item.quantity }}</span>
           <button 
             @click="removeFromCart(index)" 
-            class="text-red-500 hover:text-red-600"
+            class="text-red-300 hover:text-red-600"
           >
-            Hapus
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+              <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+            </svg>
           </button>
         </li>
       </ul>
@@ -37,9 +39,9 @@
         </button>
         <button
           @click="clear()" 
-          class="pl-20 ml-5 py-2 text-dark rounded-lg hover:text-red-800 transition duration-200"
+          class="pl-8 py-2 text-dark rounded-lg hover:text-red-800 transition duration-200"
         >
-          Clear
+          Bersihkan
         </button>
       </div>
     </div>
@@ -61,9 +63,9 @@ export default {
   },
   computed: {
     // Menghitung total harga
-  totalPrice() {
-    return this.cart.reduce((total, item) => total + Number(item.harga), 0);
-  }
+    totalPrice() {
+      return this.cart.reduce((total, item) => total + (item.harga * item.quantity), 0);
+    }
   },
     methods: {
     // Menghapus item dari cart berdasarkan index
@@ -75,7 +77,7 @@ export default {
       this.$emit('close-cart');  // Emit event untuk menutup modal
       },
       checkout() {
-      this.$emit('checkout'); // Emit event untuk melakukan checkout
+      this.$emit('checkout', this.totalPrice); // Emit event untuk melakukan checkout
       },
       clear() {
         this.$emit('clear')
