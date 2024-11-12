@@ -26,9 +26,9 @@ class OrderItems extends Model
         return $this->belongsTo(Orders::class);
     }
 
-    // Relasi: OrderItem ini terkait dengan satu Produk
+    // Relasi ke model Product
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

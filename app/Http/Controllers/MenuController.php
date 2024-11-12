@@ -17,4 +17,8 @@ class MenuController extends Controller
             'products' => $products,
         ]);
     }
+
+    public function redirect() {
+        return redirect("menu");
+    }
 }

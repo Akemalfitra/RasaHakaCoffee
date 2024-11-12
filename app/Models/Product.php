@@ -23,6 +23,16 @@ class Product extends Model
         'gambar',
     ];
 
+    public function order()
+    {
+        return $this->belongsTo(Orders::class);  // Setiap produk milik satu order
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItems::class);
+    }
+
     // Jika kamu ingin menggunakan timestamp secara otomatis
     public $timestamps = true;
 }

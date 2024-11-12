@@ -12,24 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     public function store(Request $request) {
-        // Validasi input
-        // $request->validate([
-        //     'userId' => 'required',
-        //     'cart' => 'required|array',
-        //     'cart.*.productId' => 'required|exists:products,id',  // Validasi productId yang valid
-        //     'cart.*.quantity' => 'required|integer|min:1',
-        //     'jumlah' => 'required|integer|min:0',
-        // ]);
-
-          // Membuat order baru
         $order = Orders::create([
             'user_id' => $request->input('userId'),
             'order_status' => 'pending',
-            'total_harga' => $request->input('jumlah') // Awalnya total amount 0, akan dihitung nanti
+            'total_harga' => $request->input('jumlah') 
         ]);
 
-        // Insert item ke tabel order_items
-        // Menambahkan order items
         foreach ($request->input("cart") as $item) {
             $product = Product::find($item['productId']);
             OrderItems::create([
@@ -47,10 +35,10 @@ class OrderController extends Controller
     
     public function getPesanan() {
         
-        $user_id = Auth::id(); // Mengambil ID pengguna yang sedang login
+        $user_id = Auth::id(); 
 
         // Ambil pesanan berdasarkan user_id
-        $pesanan = Orders::where('user_id', $user_id)->get();
+        $pesanan = Orders::with('user')->where('user_id', $user_id)->get();
 
         // Kelompokkan berdasarkan tanggal 'created_at' (hanya tanggalnya saja)
         $groupedPesanan = $pesanan->groupBy(function($item) {
@@ -65,11 +53,6 @@ class OrderController extends Controller
 
     public function batalkanPesanan(Request $request) {
 
-         // Validasi ID pesanan
-        $request->validate([
-            // 'id' => 'required|exists:orders,id', // Validasi ID pesanan yang ada di database
-        ]);
-
         try {
             // Temukan pesanan berdasarkan ID
             $pesanan = Orders::findOrFail($request->id);
@@ -83,5 +66,17 @@ class OrderController extends Controller
             // Jika terjadi kesalahan
             return redirect()->route('pesanan')->with('error', 'Terjadi kesalahan saat membatalkan pesanan');
         }
+    }
+
+    public function rincianPesanan(Request $request) {
+        $order_id = $request->id;
+   
+        $pesanan = OrderItems::with('product')  // Melakukan eager loading pada relasi 'product'
+        ->where('order_id', $order_id)      // Menyaring berdasarkan order_id
+        ->get();
+
+        return Inertia::render('Rincian', [
+        'pesanan' => $pesanan,
+        ]);
     }
 }

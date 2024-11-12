@@ -22,13 +22,18 @@ class Orders extends Model
     // Relasi: Order ini dimiliki oleh seorang User
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // Relasi: Order ini memiliki banyak OrderItem
     public function orderItems()
     {
         return $this->hasMany(OrderItems::class);
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);  // Order memiliki banyak produk
     }
 
 }
