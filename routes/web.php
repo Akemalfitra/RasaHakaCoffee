@@ -24,9 +24,13 @@ Route::get('/', [MenuController::class, 'getMenu'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/pesanan', function () {
-    return Inertia::render('Pesanan');
-})->middleware(['auth', 'verified'])->name('pesanan');
+Route::get('/menu', [MenuController::class, 'getMenu'])
+->middleware(['auth', 'verified'])
+->name('dashboard');
+
+Route::get('/pesanan', [OrderController::class, 'getPesanan'])
+->middleware(['auth', 'verified'])
+->name('pesanan');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,5 +39,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout');
+
+Route::post('/pesanan/batalkan', [OrderController::class, 'batalkanPesanan'])->name('pesanan.batalkan');
 
 require __DIR__.'/auth.php';

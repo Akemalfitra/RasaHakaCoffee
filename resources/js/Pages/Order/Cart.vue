@@ -1,12 +1,13 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div class="bg-white p-6 rounded-lg shadow-xl w-96 max-w-lg">
-      <p v-if="cart.length == 0" class=" text-gray-500 fw-light">Anda belum memasukkan pesanan apapun ke dalam keranjang !</p>
+      <p v-show="cart.length == 0" class=" text-gray-500 fw-light text-center py-5">Anda belum memasukkan pesanan apapun ke dalam keranjang !</p>
+      <p v-show="cart.length > 0" class="text-lg font-semibold pb-3 text-center">Keranjang pesanan</p>
 
       <!-- Daftar Item di Keranjang -->
       <ul class="space-y-4">
         <li v-for="(item, index) in cart" :key="item.id" class="flex justify-between items-center">
-          <span>{{ item.nama }} - Rp. {{ item.harga }} - x{{ item.quantity }}</span>
+          <span class="py-2">{{ item.nama }} - Rp. {{ item.harga }} - x{{ item.quantity }}</span>
           <button 
             @click="removeFromCart(index)" 
             class="text-red-300 hover:text-red-600"
@@ -19,37 +20,38 @@
       </ul>
 
       <!-- Total Harga -->
-      <div v-if="cart.length > 0" class="mt-4 border-t pt-4">
+      <div v-show="cart.length > 0" class="mt-4 border-t pt-4">
         <p class="text-lg font-semibold">Total: Rp. {{ totalPrice }}</p>
       </div>
 
       <!-- Tombol untuk Tutup Modal -->
       <div class="mt-4 flex space-x-4">
-        <button 
-          @click="closeCart" 
-          class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition duration-200"
-        >
-          Tutup
-        </button>
-        <button 
+        <PrimaryButton @click="closeCart">Tutup</PrimaryButton>
+        <PrimaryButton 
+          v-show="cart.length > 0" 
           @click="checkout" 
-          class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition duration-200"
-        >
-          Checkout
-        </button>
-        <button
-          @click="clear()" 
-          class="pl-8 py-2 text-dark rounded-lg hover:text-red-800 transition duration-200"
-        >
-          Bersihkan
-        </button>
+          class="bg-green-600 hover:bg-green-700">
+          Konfirmasi Pesanan
+        </PrimaryButton>
       </div>
+      <button
+        v-show="cart.length > 0"
+        @click="clear()" 
+        class="pt-5 text-dark rounded-lg text-gray-400 hover:text-gray-500 transition duration-200 fw-light"
+      >
+        <i>Bersihkan keranjang pesanan</i>
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+
 export default {
+  components: {
+    PrimaryButton
+  },
   props: {
     // Terima cart dan visibilitas modal dari parent
     cart: {

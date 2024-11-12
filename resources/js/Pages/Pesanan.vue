@@ -22,7 +22,11 @@ import { Head } from '@inertiajs/vue3';
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
                     <div class="p-6 text-gray-900">
-                        <Orders/>
+                        <ul>
+                            <li v-for="item in pesanan" :key="pesanan.id">
+                                <Orders :data="item"/>      
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -32,9 +36,15 @@ import { Head } from '@inertiajs/vue3';
 
 <script>
 import Orders from './Order/Orders.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+
 export default {
+    props: {
+        pesanan : Array
+    },
     components: {
-        Orders
+        Orders,
+        PrimaryButton
     }
 }
 </script>

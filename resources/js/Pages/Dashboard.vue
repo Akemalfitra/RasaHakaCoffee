@@ -28,7 +28,8 @@ import { Head } from '@inertiajs/vue3';
 
       <!-- Tombol untuk membuka modal -->
        <div class="pb-5">
-         <a href="#" @click="openCart" class="flex hover:text-green-700 justify-end transition duration-200" > 
+         <a href="#" @click="openCart" 
+         class="flex hover:text-green-700 justify-end transition duration-200 " > 
           Konfirmasi pesanan anda disini ({{ cart.length }})
              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
@@ -113,6 +114,7 @@ export default {
       // Membuat data cart hanya dengan id dan quantity
       const cartData = this.cart.map(item => ({
         productId: item.id,       // Ambil id produk
+        harga: item.harga,
         quantity: item.quantity,
       }));
 
@@ -131,7 +133,12 @@ export default {
       });
     },
     clear() {
-      this.cart.length = 0;
+        // Menghapus cart dari localStorage
+        localStorage.removeItem('cart'); // Jika kamu menyimpan cart di localStorage dengan key 'cart'
+
+        // Mengosongkan array cart di memori
+        this.cart.length = 0;
+        this.isCartVisible = false;
     }
   },
 };
