@@ -6,30 +6,57 @@
         <dt class="font-medium text-gray-900">Atas nama = {{ item.user.name }}</dt>
         <dd class="text-gray-900 sm:col-span-2">Status Pesanan = {{ item.order_status }}</dd>
         <dd class="text-gray-900 sm:col-span-2">Total bayar = {{ item.total_harga }}</dd>
-        <div class="p-3 gap-2 flex">
+        <div class=" ">
+          
           <Link 
-            :href="route('pesanan.batalkan')" 
+          class="p-3"
+            :href="route(batalkan)" 
             :data="{ id: item.id }"
             as="button"
             method="post"
           >
           <PrimaryButton
             :disabled="item.order_status == 'dibatalkan pembeli' || item.order_status == 'dibatalkan penjual'"
-            :class="item.order_status == 'dibatalkan pembeli' ? 'cursor-not-allowed opacity-50' : ''"
+            :class="item.order_status == 'dibatalkan pembeli' || item.order_status == 'dibatalkan penjual' ? 'cursor-not-allowed opacity-50' : ''"
           >
             Batalkan Pesanan
           </PrimaryButton>
-
-          
         </Link>
           <Link 
+          class="p-3"
             :href="route(rincian)"
             :data="{ id: item.id}"
             method="get"
           >
           <PrimaryButton>Rincian Pesanan</PrimaryButton>
-          
         </Link>
+
+        <div v-if="this.$page.props.auth.user.role == 'admin'">
+          <Link 
+          class="p-3"
+            :href="route(batalkan)" 
+            :data="{ id: item.id }"
+            as="button"
+            method="post"
+          >
+          <PrimaryButton
+            :disabled="item.order_status == 'dibatalkan pembeli' || item.order_status == 'dibatalkan penjual'"
+            :class="item.order_status == 'dibatalkan pembeli' || item.order_status == 'dibatalkan penjual' ? 'cursor-not-allowed opacity-50' : ''"
+          >
+            Proses Pesanan
+          </PrimaryButton>
+        </Link>
+          <Link 
+          class="p-3"
+            :href="route(rincian)"
+            :data="{ id: item.id}"
+            method="get"
+          >
+          <PrimaryButton
+          class="bg-green-600"
+          >Pesanan Selesai</PrimaryButton>
+        </Link>
+        </div>
           
         </div>
       </div>
@@ -53,6 +80,9 @@ export default {
       required : true
     },
     rincian: {
+      required : true
+    },
+    batalkan: {
       required : true
     },
   }

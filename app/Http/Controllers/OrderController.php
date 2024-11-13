@@ -48,7 +48,8 @@ class OrderController extends Controller
         // Kirimkan data yang sudah dikelompokkan ke tampilan Inertia
         return Inertia::render('Pesanan', [
             'pesanan' => $groupedPesanan,
-            'route' => "rincian"
+            'route' => "rincian",
+            'batalkan' => 'user.pesanan.batalkan'
         ]);
     }
 

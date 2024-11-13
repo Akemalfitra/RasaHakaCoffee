@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/checkout', [OrderController::class, 'store'])->name('checkout');
-    Route::post('/pesanan/batalkan', [OrderController::class, 'batalkanPesanan'])->name('pesanan.batalkan');
+    Route::post('/pesanan/batalkan', [OrderController::class, 'batalkanPesanan'])->name('user.pesanan.batalkan');
     Route::get('/pesanan/rincian', [OrderController::class, 'rincianPesanan'])->name('rincian');
 });
 
@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/pesanan/rincian', [AdminController::class, 'rincianPesanan'])->name('rincian.admin');
     Route::get('/admin/products', [AdminController::class, 'getProducts'])->name('admin.products');
+    Route::post('admin/pesanan/batalkan', [AdminController::class, 'batalkanPesanan'])->name('admin.pesanan.batalkan');
 });
 
 

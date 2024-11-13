@@ -24,7 +24,7 @@ import { Head } from '@inertiajs/vue3';
                     <div class="p-6 text-gray-900">
                         <ul>
                             <li v-for="item in pesanan" :key="pesanan.id">
-                                <Orders :data="item" :rincian="route"/>      
+                                <Orders :data="item" :rincian="route" :batalkan="batalkan"/>      
                             </li>
                         </ul>
                     </div>
@@ -40,7 +40,8 @@ import Orders from './Order/Orders.vue';
 export default {
     props: {
         pesanan: Object,
-        route: String
+        route: String,
+        batalkan: String
     },
     components: {
         Orders,
