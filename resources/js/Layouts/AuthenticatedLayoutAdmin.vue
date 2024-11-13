@@ -42,6 +42,12 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Pesanan Pelanggan
                                 </NavLink>
+                                <NavLink
+                                    :href="route('admin.products')"
+                                    :active="route().current('admin.products')"
+                                >
+                                    Edit Menu
+                                </NavLink>
                             </div>
                         </div>
 

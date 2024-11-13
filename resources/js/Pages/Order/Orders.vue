@@ -1,7 +1,3 @@
-<script>
-
-
-</script>
 <template>
   <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
     <dl class="-my-3 divide-y divide-gray-100 text-sm">
@@ -14,11 +10,12 @@
           <Link 
             :href="route('pesanan.batalkan')" 
             :data="{ id: item.id }"
+            as="button"
             method="post"
           >
           <PrimaryButton
-            :disabled="item.order_status === 'dibatalkan'"
-            :class="item.order_status === 'dibatalkan' ? 'cursor-not-allowed opacity-50' : ''"
+            :disabled="item.order_status == 'dibatalkan pembeli' || item.order_status == 'dibatalkan penjual'"
+            :class="item.order_status == 'dibatalkan pembeli' ? 'cursor-not-allowed opacity-50' : ''"
           >
             Batalkan Pesanan
           </PrimaryButton>
@@ -26,8 +23,8 @@
           
         </Link>
           <Link 
-            :href="route('rincian')"
-            :data="{ id: item.id }"
+            :href="route(rincian)"
+            :data="{ id: item.id}"
             method="get"
           >
           <PrimaryButton>Rincian Pesanan</PrimaryButton>
@@ -54,7 +51,10 @@ export default {
   props: {
     data: {
       required : true
-    }
+    },
+    rincian: {
+      required : true
+    },
   }
 }
 </script>

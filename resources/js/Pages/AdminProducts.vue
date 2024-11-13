@@ -12,7 +12,7 @@ import { Head } from '@inertiajs/vue3';
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                Pesanan Pelanggan
+                Daftar Menu
             </h2>
         </template>
 
@@ -23,11 +23,9 @@ import { Head } from '@inertiajs/vue3';
                 >
                     <div class="p-6 text-gray-900">
                         <ul>
-                            <!-- <p v-if="pesanan.length === 0">Anda belum memesan apapun.</p>
-
-                            <li v-for="item in pesanan" :key="pesanan.id">
-                                <Orders :data="item"/>      
-                            </li> -->
+                            <li>
+                                {{ Product }}
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -36,13 +34,14 @@ import { Head } from '@inertiajs/vue3';
     </AuthenticatedLayout>
 </template>
 
-<!-- <script>
+<script>
 import Orders from './Order/Orders.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 export default {
     props: {
-        pesanan : Array
+        Product: Array,
+        route
     },
     components: {
         Orders,
@@ -50,4 +49,3 @@ export default {
     }
 }
 </script>
-> -->

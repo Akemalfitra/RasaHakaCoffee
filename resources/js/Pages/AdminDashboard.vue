@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayoutAdmin.vue';
 import { Head } from '@inertiajs/vue3';
 
 </script>
@@ -12,7 +12,7 @@ import { Head } from '@inertiajs/vue3';
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                Mohon tunggu, pesanan anda sedang di proses.
+                Pesanan Pelanggan
             </h2>
         </template>
 
@@ -23,8 +23,9 @@ import { Head } from '@inertiajs/vue3';
                 >
                     <div class="p-6 text-gray-900">
                         <ul>
-                            <li v-for="item in pesanan" :key="pesanan.id">
-                                <Orders :data="item" :rincian="route"/>      
+                            <p v-if="pesanan.length === 0">Belum ada</p>
+                            <li>
+                                <Orders :data="pesanan" :rincian="route"/>      
                             </li>
                         </ul>
                     </div>
@@ -36,14 +37,16 @@ import { Head } from '@inertiajs/vue3';
 
 <script>
 import Orders from './Order/Orders.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 export default {
     props: {
-        pesanan: Object,
+        pesanan: Array,
         route: String
     },
     components: {
         Orders,
+        PrimaryButton
     }
 }
 </script>

@@ -48,6 +48,7 @@ class OrderController extends Controller
         // Kirimkan data yang sudah dikelompokkan ke tampilan Inertia
         return Inertia::render('Pesanan', [
             'pesanan' => $groupedPesanan,
+            'route' => "rincian"
         ]);
     }
 
@@ -58,7 +59,7 @@ class OrderController extends Controller
             $pesanan = Orders::findOrFail($request->id);
 
             // Ubah status pesanan menjadi 'dibatalkan'
-            $pesanan->order_status = 'dibatalkan';
+            $pesanan->order_status = 'dibatalkan pembeli';
             
             $pesanan->save(); // Simpan perubahan ke database
 

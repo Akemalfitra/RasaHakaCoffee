@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/pesanan/rincian', [AdminController::class, 'rincianPesanan'])->name('rincian.admin');
+    Route::get('/admin/products', [AdminController::class, 'getProducts'])->name('admin.products');
 });
 
 
