@@ -36,9 +36,10 @@ import { Head } from '@inertiajs/vue3';
                                 </div>
                             </li>
                             <div class="py-3">
-                                    <PrimaryButton
+                                <PrimaryButton
                                     @click="goBack"
-                                     >Kembali</PrimaryButton>
+                                        >Kembali
+                                </PrimaryButton>
                             </div>
                         </ul>
                     </div>

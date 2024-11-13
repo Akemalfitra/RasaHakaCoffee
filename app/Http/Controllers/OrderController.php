@@ -58,7 +58,9 @@ class OrderController extends Controller
             $pesanan = Orders::findOrFail($request->id);
 
             // Ubah status pesanan menjadi 'dibatalkan'
-            $pesanan->delete();
+            $pesanan->order_status = 'dibatalkan';
+            
+            $pesanan->save(); // Simpan perubahan ke database
 
             // Mengembalikan response sukses ke frontend
             return redirect()->route('pesanan')->with('success', 'Pesanan berhasil dibatalkan');

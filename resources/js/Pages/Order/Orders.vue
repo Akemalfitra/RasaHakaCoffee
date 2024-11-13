@@ -8,15 +8,21 @@
       <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4" v-for="item in data">
         <dt class="font-medium text-gray-900">ID Pesananan = {{ item.id }}</dt>
         <dt class="font-medium text-gray-900">Atas nama = {{ item.user.name }}</dt>
-        <dd class="text-gray-700 sm:col-span-2">Status Pesanan = {{ item.order_status }}</dd>
-        <dd class="text-gray-700 sm:col-span-2">Total = {{ item.total_harga }}</dd>
+        <dd class="text-gray-900 sm:col-span-2">Status Pesanan = {{ item.order_status }}</dd>
+        <dd class="text-gray-900 sm:col-span-2">Total bayar = {{ item.total_harga }}</dd>
         <div class="p-3 gap-2 flex">
           <Link 
             :href="route('pesanan.batalkan')" 
             :data="{ id: item.id }"
             method="post"
           >
-          <PrimaryButton>Batalkan Pesanan</PrimaryButton>
+          <PrimaryButton
+            :disabled="item.order_status === 'dibatalkan'"
+            :class="item.order_status === 'dibatalkan' ? 'cursor-not-allowed opacity-50' : ''"
+          >
+            Batalkan Pesanan
+          </PrimaryButton>
+
           
         </Link>
           <Link 

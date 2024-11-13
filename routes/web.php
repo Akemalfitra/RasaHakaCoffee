@@ -4,8 +4,10 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+
 
 
 Route::middleware('auth')->group(function () {
@@ -18,6 +20,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout', [OrderController::class, 'store'])->name('checkout');
     Route::post('/pesanan/batalkan', [OrderController::class, 'batalkanPesanan'])->name('pesanan.batalkan');
     Route::get('/pesanan/rincian', [OrderController::class, 'rincianPesanan'])->name('rincian');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
 
