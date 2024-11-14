@@ -22,11 +22,15 @@ import { Head } from '@inertiajs/vue3';
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
                     <div class="p-6 text-gray-900">
-                        <ul>
-                            <li>
-                                {{ Product }}
-                            </li>
-                        </ul>
+                             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg flex">
+                                <div class="p-6 text-gray-900">
+                                    <ul class="grid sm:grid-cols-2 gap-6 grid-cols-1 md:grid-cols-3">
+                                    <li v-for="item in Product">
+                                        <AdminMenu :data="item" />
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -37,6 +41,7 @@ import { Head } from '@inertiajs/vue3';
 <script>
 import Orders from './Order/Orders.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import AdminMenu from './Order/AdminMenu.vue';
 
 export default {
     props: {
@@ -45,7 +50,8 @@ export default {
     },
     components: {
         Orders,
-        PrimaryButton
+        PrimaryButton,
+        AdminMenu
     }
 }
 </script>

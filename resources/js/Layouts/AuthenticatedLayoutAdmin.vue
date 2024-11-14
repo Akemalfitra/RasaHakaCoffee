@@ -150,10 +150,16 @@ const showingNavigationDropdown = ref(false);
                 >
                     <div class="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
+                            :href="route('admin.dashboard')"
+                            :active="route().current('admin.dashboard')"
                         >
-                            Dashboard
+                            Pesanan pelanggan
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('admin.products')"
+                            :active="route().current('admin.products')"
+                        >
+                            Daftar menu
                         </ResponsiveNavLink>
                     </div>
 
