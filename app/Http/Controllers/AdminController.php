@@ -16,8 +16,7 @@ class AdminController extends Controller
 
         return Inertia::render('AdminDashboard', [
             'pesanan' => $pesanan,
-            'route' => "rincian.admin",
-            'batalkan' => 'admin.pesanan.batalkan'
+            'route' => ["rincian.admin", "admin.pesanan.batalkan", "admin.pesanan.proses", "admin.pesanan.selesai", "admin.pesanan.hapus" ]
         ]);
         
     }
@@ -52,7 +51,67 @@ class AdminController extends Controller
             $pesanan = Orders::findOrFail($request->id);
 
             // Ubah status pesanan menjadi 'dibatalkan'
-            $pesanan->order_status = 'dibatalkan penjual';
+            $pesanan->order_status = 'Dibatalkan penjual';
+            
+            $pesanan->save(); // Simpan perubahan ke database
+
+            // Mengembalikan response sukses ke frontend
+            return redirect()->route('admin.dashboard')->with('success', 'Pesanan berhasil dibatalkan');
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan
+            return redirect()->route('admin.dashboard')->with('error', 'Terjadi kesalahan saat membatalkan pesanan');
+        }
+    }
+    
+    public function prosesPesanan(Request $request) {
+
+        try {
+
+            // Temukan pesanan berdasarkan ID
+            $pesanan = Orders::findOrFail($request->id);
+
+            // Ubah status pesanan menjadi 'dibatalkan'
+            $pesanan->order_status = 'Pesanan diproses';
+            
+            $pesanan->save(); // Simpan perubahan ke database
+
+            // Mengembalikan response sukses ke frontend
+            return redirect()->route('admin.dashboard')->with('success', 'Pesanan berhasil dibatalkan');
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan
+            return redirect()->route('admin.dashboard')->with('error', 'Terjadi kesalahan saat membatalkan pesanan');
+        }
+    }
+    
+    public function selesaiPesanan(Request $request) {
+
+        try {
+
+            // Temukan pesanan berdasarkan ID
+            $pesanan = Orders::findOrFail($request->id);
+
+            // Ubah status pesanan menjadi 'dibatalkan'
+            $pesanan->order_status = 'Pesanan selesai';
+            
+            $pesanan->save(); // Simpan perubahan ke database
+
+            // Mengembalikan response sukses ke frontend
+            return redirect()->route('admin.dashboard')->with('success', 'Pesanan berhasil dibatalkan');
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan
+            return redirect()->route('admin.dashboard')->with('error', 'Terjadi kesalahan saat membatalkan pesanan');
+        }
+    }
+    
+    public function hapusPesanan(Request $request) {
+
+        try {
+
+            // Temukan pesanan berdasarkan ID
+            $pesanan = Orders::findOrFail($request->id);
+
+            // Ubah status pesanan menjadi 'dibatalkan'
+            $pesanan->delete();
             
             $pesanan->save(); // Simpan perubahan ke database
 

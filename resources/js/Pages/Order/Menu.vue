@@ -28,7 +28,7 @@
             <p class="font-medium">{{ data.stok }}</p>
           </div>
         </div>
-            <PrimaryButton @click="addToCart(data)">Beli</PrimaryButton>
+            <PrimaryButton @click="addToCart(data)">Pesan</PrimaryButton>
       </div>
     </div>
   </div>

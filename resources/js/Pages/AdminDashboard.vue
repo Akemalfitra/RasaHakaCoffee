@@ -25,7 +25,7 @@ import { Head } from '@inertiajs/vue3';
                         <ul>
                             <p v-if="pesanan.length === 0">Belum ada</p>
                             <li>
-                                <Orders :data="pesanan" :rincian="route" :batalkan="batalkan"/>      
+                                <Orders :data="pesanan" :rute="route"/>      
                             </li>
                         </ul>
                     </div>
@@ -42,8 +42,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 export default {
     props: {
         pesanan: Array,
-        route: String,
-        batalkan: String
+        route: Array
     },
     components: {
         Orders,

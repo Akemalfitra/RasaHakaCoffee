@@ -16,14 +16,27 @@ class DatabaseSeeder extends Seeder
     // Membuat pengguna
     $users = [
         [
-            'name' => 'Test User',
+            'name' => 'User',
             'email' => 'user@gmail.com',
             'password' => bcrypt('user'),
+            'role' => 'user',
         ],
         [
-            'name' => 'Test Admin',
+            'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
+            'role' => 'admin',
+        ],
+        [
+            'name' => 'User2',
+            'email' => 'user2@gmail.com',
+            'password' => bcrypt('user2'),
+            'role' => 'user',
+        ],
+        [
+            'name' => 'Admin2',
+            'email' => 'admin2@gmail.com',
+            'password' => bcrypt('admin2'),
             'role' => 'admin',
         ]
     ];

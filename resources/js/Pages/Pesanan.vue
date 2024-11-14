@@ -10,9 +10,16 @@ import { Head } from '@inertiajs/vue3';
     <AuthenticatedLayout>
         <template #header>
             <h2
+            v-if="pesanan.length != 0"
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                Mohon tunggu, pesanan anda sedang di proses.
+                <p>Selamat berbelanja.</p>
+            </h2>
+            <h2
+            v-if="pesanan.length == 0"
+                class="text-xl font-semibold leading-tight text-gray-800"
+            >
+                <p>Anda belum memesan apapun.</p>
             </h2>
         </template>
 
@@ -24,7 +31,7 @@ import { Head } from '@inertiajs/vue3';
                     <div class="p-6 text-gray-900">
                         <ul>
                             <li v-for="item in pesanan" :key="pesanan.id">
-                                <Orders :data="item" :rincian="route" :batalkan="batalkan"/>      
+                                <Orders :data="item" :rute="route"/>      
                             </li>
                         </ul>
                     </div>
@@ -40,8 +47,7 @@ import Orders from './Order/Orders.vue';
 export default {
     props: {
         pesanan: Object,
-        route: String,
-        batalkan: String
+        route: Array
     },
     components: {
         Orders,
