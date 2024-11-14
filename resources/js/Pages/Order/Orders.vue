@@ -61,18 +61,20 @@
       </div> 
     </div>
 
-        <Link 
-          v-if="item.order_status =='Pesanan selesai'"      
-          :href="route(rute[4])"
-          :data="{ id: item.id}"
-          as="button"
-          method="post"
-        >
-        <PrimaryButton
-        class="bg-red-600 hover:bg-red-700"
-        >Hapus data pesanan</PrimaryButton>
-      </Link>
-
+    <div v-if="this.$page.props.auth.user.role == 'admin'" class="flex gap-3 sm:pl-20">
+      <Link 
+        v-if="item.order_status =='Pesanan selesai'"      
+        :href="route(rute[4])"
+        :data="{ id: item.id}"
+        as="button"
+        method="post"
+      >
+      <PrimaryButton
+      class="bg-red-600 hover:bg-red-700"
+      >Hapus data pesanan</PrimaryButton>
+    </Link>
+    </div>
+  
       </ul>
     </dl>
   </div>

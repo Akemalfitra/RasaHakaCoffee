@@ -16,7 +16,7 @@ import { Head } from '@inertiajs/vue3';
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
                     <div class="p-6 text-gray-900">
-                        <p>ini halaman edit</p>
+                       <FormEditProduct :data="product"/>
                     </div>
                 </div>
             </div>
@@ -26,17 +26,19 @@ import { Head } from '@inertiajs/vue3';
 
 <script>
 import Orders from './Order/Orders.vue';
+import FormEditProduct from './Order/FormEditProduct.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 
 export default {
     props: {
-        pesanan : Array
+        product : Array
     },
     components: {
         Orders,
         PrimaryButton,
-        Link
+        Link,
+        FormEditProduct
     },
       methods: {
         goBack() {

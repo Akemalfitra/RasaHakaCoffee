@@ -123,8 +123,12 @@ class AdminController extends Controller
         }
     }
 
-    public function editPesanan() {
+    public function editPesanan(Request $request) {
 
-        return Inertia::render('AdminEditProducts');
+        $id = $request->id;
+
+        $product = Product::where('id', $id)->get();
+
+        return Inertia::render('AdminEditProducts', ['product' => $product]);
     }
 }
