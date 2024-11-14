@@ -28,8 +28,24 @@
             <p class="font-medium">{{ data.stok }}</p>
           </div>
         </div>
-            <PrimaryButton @click="addToCart(data)">Edit</PrimaryButton>
-            <PrimaryButton @click="addToCart(data)">Hapus</PrimaryButton>
+
+        <Link
+            :href="route('admin.pesanan.edit')"
+            :data="{ id: data.id}"
+            as="button"
+            method="get"
+        >
+          <PrimaryButton>Edit</PrimaryButton>
+        </Link>
+        <Link
+            :href="route('admin.pesanan.hapus')"
+            :data="{ id: data.id}"
+            as="button"
+            method="get"
+        >
+          <PrimaryButton class="bg-red-600 hover:bg-red-700">Hapus</PrimaryButton>
+        </Link>
+
       </div>
     </div>
   </div>
@@ -37,10 +53,12 @@
 
 <script>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import { Link, useForm, usePage } from '@inertiajs/vue3';
 
 export default {
   components: {
-    PrimaryButton
+    PrimaryButton,
+    Link
   },
   props: {
     data: {

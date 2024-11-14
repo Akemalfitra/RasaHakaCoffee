@@ -122,4 +122,9 @@ class AdminController extends Controller
             return redirect()->route('admin.dashboard')->with('error', 'Terjadi kesalahan saat membatalkan pesanan');
         }
     }
+
+    public function editPesanan() {
+
+        return Inertia::render('AdminEditProducts');
+    }
 }

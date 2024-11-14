@@ -51,7 +51,7 @@ export default {
     components: {
         Orders,
         PrimaryButton,
-        AdminMenu
+        AdminMenu,
     }
 }
 </script>
