@@ -86,59 +86,56 @@ class AdminController extends Controller
     
     public function selesaiPesanan(Request $request) {
 
-        try {
+        // Temukan pesanan berdasarkan ID
+        $pesanan = Orders::find($request->id);
 
-            // Temukan pesanan berdasarkan ID
-            $pesanan = Orders::findOrFail($request->id);
-
-            // Ubah status pesanan menjadi 'dibatalkan'
+        if ($pesanan) {
+            // Ubah status pesanan menjadi 'Pesanan selesai'
             $pesanan->order_status = 'Pesanan selesai';
             
             $pesanan->save(); // Simpan perubahan ke database
 
             // Mengembalikan response sukses ke frontend
             return redirect()->route('admin.dashboard')->with('success', 'Pesanan berhasil dibatalkan');
-        } catch (\Exception $e) {
-            // Jika terjadi kesalahan
-            return redirect()->route('admin.dashboard')->with('error', 'Terjadi kesalahan saat membatalkan pesanan');
+        } else {
+            // Jika pesanan tidak ditemukan, kembalikan response error
+            return redirect()->route('admin.dashboard')->with('error', 'Pesanan tidak ditemukan');
         }
     }
     
     public function hapusPesanan(Request $request) {
 
-        try {
+        $pesanan = Orders::find($request->id);
 
-            // Temukan pesanan berdasarkan ID
-            $pesanan = Orders::findOrFail($request->id);
-
-            // Ubah status pesanan menjadi 'dibatalkan'
-            $pesanan->delete();
+        if ($pesanan) {
             
-            $pesanan->save(); // Simpan perubahan ke database
+            $pesanan->delete();
 
-            // Mengembalikan response sukses ke frontend
             return redirect()->route('admin.dashboard')->with('success', 'Pesanan berhasil dibatalkan');
-        } catch (\Exception $e) {
-            // Jika terjadi kesalahan
-            return redirect()->route('admin.dashboard')->with('error', 'Terjadi kesalahan saat membatalkan pesanan');
+
+        } else {
+
+            return redirect()->route('admin.dashboard')->with('error', 'Pesanan tidak ditemukan atau sudah dibatalkan');
         }
+
     }
 
     public function hapusMenu(Request $request) {
 
-        // Temukan pesanan berdasarkan ID dan hapus
-        $pesanan = Product::find($request->id);
+        $produk = Product::find($request->id);
 
-        if ($pesanan) {
-            // Jika pesanan ditemukan, hapus
-            $pesanan->delete();
+        if ($produk) {
+            
+            if ($produk->gambar && Storage::exists('/img/products/' . $produk->gambar)) {
+                Storage::delete('/img/products/' . $produk->gambar); 
+            }
 
-            // Mengembalikan response sukses ke frontend
-            return redirect()->route('admin.products')->with('success', 'Pesanan berhasil dibatalkan');
+            $produk->delete();
+
+            return redirect()->route('admin.products')->with('success', 'Produk berhasil dihapus');
         }
 
-        // Jika pesanan tidak ditemukan, kembalikan response error
-        return redirect()->route('admin.products')->with('error', 'Pesanan tidak ditemukan');
+        return redirect()->route('admin.products')->with('error', 'Produk tidak ditemukan');
 
     }
 
@@ -166,23 +163,16 @@ class AdminController extends Controller
         'gambar' => 'required', // Validasi foto
     ]);
 
-    // $request->validate([
-    //     'nama' => 'required|string|max:255',
-    //     'jenis' => 'required|string|max:255',
-    //     'stok' => 'required|integer',
-    //     'harga' => 'required|numeric',
-    //     'gambar' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048', // Validasi foto
-    // ]);
-
     // Upload foto ke server
     if ($request->hasFile('gambar')) {
         // Mendapatkan ekstensi file
         $extension = $request->gambar->getClientOriginalExtension();
+        
         // Membuat nama file baru dengan hash
         $fileName = md5(time()) . '.' . $extension;
 
         // Menentukan folder tujuan
-        $folder = '/products';
+        $folder = ('/img/products');
 
         // Cek apakah folder ada, jika tidak ada maka buat folder tersebut
         if (!Storage::exists($folder)) {

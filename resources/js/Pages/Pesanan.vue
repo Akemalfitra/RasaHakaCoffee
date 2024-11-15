@@ -13,7 +13,7 @@ import { Head } from '@inertiajs/vue3';
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                <p>List pesanan.</p>
+                <p>List pesanan</p>
             </h2>
         </template>
 

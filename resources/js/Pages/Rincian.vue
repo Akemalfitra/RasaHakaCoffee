@@ -12,7 +12,7 @@ import { Head } from '@inertiajs/vue3';
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                Mohon tunggu, pesanan anda sedang di proses.
+                Rincian pesanan
             </h2>
         </template>
 

@@ -12,7 +12,7 @@ import { Head } from '@inertiajs/vue3';
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                Mohon tunggu, pesanan anda sedang di proses.
+                Rincian pesanan.
             </h2>
         </template>
 
@@ -25,7 +25,7 @@ import { Head } from '@inertiajs/vue3';
                         <ul>
                             <li v-for="(order, index) in pesanan" :key="order.id">  
                                 <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
-                                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+                                    <dl class=" divide-gray-100 text-sm">
                                         <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                                             <dt class="font-medium text-gray-900">{{order.product.nama}}</dt>
                                             <dt class="font-medium text-gray-900">x{{order.quantity}}</dt>
@@ -65,5 +65,5 @@ export default {
             window.history.back(); // Kembali ke halaman sebelumnya
         }
     }
-}
+  }
 </script>
