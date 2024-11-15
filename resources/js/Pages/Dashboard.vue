@@ -9,10 +9,24 @@ import { Head } from '@inertiajs/vue3';
 
   <AuthenticatedLayout>
     <template #header>
-      <h2 class="text-xl font-semibold leading-tight text-gray-800">
-        Selamat datang di Website pemesanan online RM Simangat, Silahkan pesan menu favorit Anda.
-      </h2>
+          <div>
+            <a href="#" class="text-2xl font-bold text-yellow-600"> RM Simangat </a>
+            <address class="mt-2 not-italic">Lhokseumawe, Hagu Barat Laut.</address>
+          </div>
     </template>
+
+  <div class="relative w-full h-64 overflow-hidden">
+    <img src="img/background.jpg" alt="" class="w-full h-auto">
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+      <h1 class="text-xl font-semibold leading-tight text-white">
+        RM Simangat
+      </h1>
+      <h2 class="text-xl font-semibold leading-tight text-white">
+        Nikmati Hidangan Spesial Kami, Rasakan Kelezatan Disetiap Gigitannya Simangat Bertoh-Mangat.
+      </h2>
+    </div>
+  </div>
+
 
     <Cart 
       :cart="cart" 

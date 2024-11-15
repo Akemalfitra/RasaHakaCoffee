@@ -49,8 +49,8 @@ const showingNavigationDropdown = ref(false);
                                     Edit menu
                                 </NavLink>
                                 <NavLink
-                                    :href="route('admin.tambah.products')"
-                                    :active="route().current('admin.tambah.products')"
+                                    :href="route('admin.viewTambah.products')"
+                                    :active="route().current('admin.viewTambah.products')"
                                 >
                                     Tambah menu
                                 </NavLink>
@@ -168,8 +168,8 @@ const showingNavigationDropdown = ref(false);
                             Daftar menu
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            :href="route('admin.tambah.products')"
-                            :active="route().current('admin.tambah.products')"
+                            :href="route('admin.viewTambah.products')"
+                            :active="route().current('admin.viewTambah.products')"
                         >
                             Tambah menu
                         </ResponsiveNavLink>

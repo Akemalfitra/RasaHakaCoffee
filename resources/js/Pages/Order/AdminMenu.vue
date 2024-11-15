@@ -9,27 +9,23 @@
     <div class="mt-2">
       <dl>
         <div>
-          <dt class="sr-only">Price</dt>
+          <dt class="sr-only">Harga</dt>
           <dd class="text-sm text-gray-500">Rp {{ data.harga }}</dd>
         </div>
         <div>
-          <dt class="sr-only">Address</dt>
+          <dt class="sr-only">Nama</dt>
           <dd class="font-medium">{{ data.nama }}</dd>
         </div>
       </dl>
+ 
+      <div class="mt-1.5 sm:mt-0">
+        <dt class="text-gray-500">Jenis</dt>
+        <dd class="font-medium">{{ data.jenis }}</dd>
+      </div>
   
-      <div class="mt-6 flex items-center gap-8 text-xs">
-        <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-          <svg class="size-4 text-indigo-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
-          </svg>
-          <div class="mt-1.5 sm:mt-0">
-            <p class="text-gray-500">Stok</p>
-            <p class="font-medium">{{ data.stok }}</p>
-          </div>
-        </div>
-
-        <Link
+      <div class="mt-6 flex items-center gap-3 text-xs">
+        <div class="flex gap-2 sm:shrink-0 sm:items-center sm:gap-2">
+           <Link
             :href="route('admin.pesanan.edit')"
             :data="{ id: data.id}"
             as="button"
@@ -45,7 +41,7 @@
         >
           <PrimaryButton class="bg-red-600 hover:bg-red-700">Hapus</PrimaryButton>
         </Link>
-
+      </div>
       </div>
     </div>
   </div>

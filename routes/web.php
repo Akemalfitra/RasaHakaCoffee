@@ -30,10 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/pesanan/proses', [AdminController::class, 'prosesPesanan'])->name('admin.pesanan.proses');
     Route::post('admin/pesanan/selesai', [AdminController::class, 'selesaiPesanan'])->name('admin.pesanan.selesai');
     Route::post('admin/pesanan/hapus', [AdminController::class, 'hapusPesanan'])->name('admin.pesanan.hapus');
-    Route::get('admin/pesanan/edit', [AdminController::class, 'editPesanan'])->name('admin.pesanan.edit');
+    Route::get('admin/menu/edit', [AdminController::class, 'editPesanan'])->name('admin.pesanan.edit');
     Route::post('admin/pesanan/hapus', [AdminController::class, 'hapusPesanan'])->name('admin.pesanan.hapus');
-    Route::get('admin/manu/tambah', [AdminController::class, 'tambahMenu'])->name('admin.tambah.products');
+    Route::get('admin/manu/tambah', [AdminController::class, 'viewTambahMenu'])->name('admin.viewTambah.products');
+    Route::post('admin/manu/tambahMenu', [AdminController::class, 'tambahMenu'])->name('admin.tambah.products');
     Route::get('/admin/profile', [ProfileController::class, 'editAdmin'])->name('profile.edit.admin');
+    
 });
 
 

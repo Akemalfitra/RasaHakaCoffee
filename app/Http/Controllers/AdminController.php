@@ -7,6 +7,7 @@ use App\Models\Orders;
 use App\Models\Product;
 use App\Models\OrderItems;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -132,8 +133,58 @@ class AdminController extends Controller
         return Inertia::render('AdminEditProducts', ['product' => $product]);
     }
 
-    public function tambahMenu() {
+    public function ViewTambahMenu() {
 
         return Inertia::render('AdminTambahProducts');
+    }
+
+    public function tambahMenu(Request $request) {
+
+    // Validasi data yang diterima
+    $request->validate([
+        'nama' => 'required',
+        'jenis' => 'required',
+        'harga' => 'required',
+        'gambar' => 'required', // Validasi foto
+    ]);
+
+    // $request->validate([
+    //     'nama' => 'required|string|max:255',
+    //     'jenis' => 'required|string|max:255',
+    //     'stok' => 'required|integer',
+    //     'harga' => 'required|numeric',
+    //     'gambar' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048', // Validasi foto
+    // ]);
+
+    // Upload foto ke server
+    if ($request->hasFile('gambar')) {
+        // Mendapatkan ekstensi file
+        $extension = $request->gambar->getClientOriginalExtension();
+        // Membuat nama file baru dengan hash
+        $fileName = md5(time()) . '.' . $extension;
+
+        // Menentukan folder tujuan
+        $folder = 'img/products';
+
+        // Cek apakah folder ada, jika tidak ada maka buat folder tersebut
+        if (!Storage::exists($folder)) {
+            Storage::makeDirectory($folder);
+        }
+
+        // Simpan file ke folder yang sudah ditentukan
+        $request->gambar->storeAs($folder, $fileName);
+        
+    }
+
+    // Simpan data ke database
+    Product::create([
+        'nama' => $request->nama,
+        'jenis' => $request->jenis,
+        'harga' => $request->harga,
+        'gambar' => $fileName ?? null, // Menyimpan path foto
+    ]);
+
+    // Cek apakah data berhasil disimpan dan redirect atau response
+    return redirect()->route('admin.viewTambah.products')->with('success', 'Menu berhasil ditambahkan.');
     }
 }
