@@ -131,4 +131,9 @@ class AdminController extends Controller
 
         return Inertia::render('AdminEditProducts', ['product' => $product]);
     }
+
+    public function tambahMenu() {
+
+        return Inertia::render('AdminTambahProducts');
+    }
 }

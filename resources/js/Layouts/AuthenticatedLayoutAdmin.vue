@@ -40,13 +40,19 @@ const showingNavigationDropdown = ref(false);
                                     :href="route('admin.dashboard')"
                                     :active="route().current('admin.dashboard')"
                                 >
-                                    Pesanan Pelanggan
+                                    Pesanan pelanggan
                                 </NavLink>
                                 <NavLink
                                     :href="route('admin.products')"
                                     :active="route().current('admin.products')"
                                 >
-                                    Edit Menu
+                                    Edit menu
+                                </NavLink>
+                                <NavLink
+                                    :href="route('admin.tambah.products')"
+                                    :active="route().current('admin.tambah.products')"
+                                >
+                                    Tambah menu
                                 </NavLink>
                             </div>
                         </div>
@@ -160,6 +166,12 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('admin.products')"
                         >
                             Daftar menu
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('admin.tambah.products')"
+                            :active="route().current('admin.tambah.products')"
+                        >
+                            Tambah menu
                         </ResponsiveNavLink>
                     </div>
 

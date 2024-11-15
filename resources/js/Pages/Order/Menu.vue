@@ -24,8 +24,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
           </svg>
           <div class="mt-1.5 sm:mt-0">
-            <p class="text-gray-500">Stok</p>
-            <p class="font-medium">{{ data.stok }}</p>
+            <p class="text-gray-500">Jenis</p>
+            <p class="font-medium">{{ data.jenis }}</p>
           </div>
         </div>
             <PrimaryButton @click="addToCart(data)">Pesan</PrimaryButton>
