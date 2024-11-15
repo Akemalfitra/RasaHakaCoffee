@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-  <Head title="Dashboard" />
+  <Head title="Daftar menu" />
 
   <AuthenticatedLayout>
     <template #header>
@@ -15,13 +15,13 @@ import { Head } from '@inertiajs/vue3';
           </div>
     </template>
 
-  <div class="relative w-full h-64 overflow-hidden">
-    <img src="img/background.jpg" alt="" class="w-full h-auto">
+  <div class="relative w-full sm:h-64 h-36 overflow-hidden">
+    <img src="img/background.jpg" alt="" class="w-full sm:h-auto h-36 overflow-hidden">
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
       <h1 class="text-xl font-semibold leading-tight text-white">
         RM Simangat
       </h1>
-      <h2 class="text-xl font-semibold leading-tight text-white">
+      <h2 class="sm:text-xl text-sm font-semibold leading-tight text-white">
         Nikmati Hidangan Spesial Kami, Rasakan Kelezatan Disetiap Gigitannya Simangat Bertoh-Mangat.
       </h2>
     </div>

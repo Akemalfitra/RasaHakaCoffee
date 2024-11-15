@@ -73,11 +73,11 @@ export default {
   
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label class="sr-only" for="jenis">Jenis</label>
+                <label class="sr-only" for="jenis">Jenis menu</label>
                 <input
                   v-model="form.jenis"
                   class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                  placeholder="Jenis"
+                  placeholder="Jenis menu"
                   type="text"
                   name="jenis"
                 />
@@ -97,6 +97,7 @@ export default {
   
             <div>
               <label class="sr-only" for="gambar">Foto</label>
+              <p class="py-3">Upload foto menu <span class="text-gray-400">(maksimal 2mb).</span></p>
               <input
                 @change="handleFileChange"
                 class="w-full rounded-lg border-gray-200 p-3 text-sm"

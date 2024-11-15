@@ -5,21 +5,15 @@ import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Pesanan" />
+    <Head title="Pesanan anda" />
 
     <AuthenticatedLayout>
         <template #header>
+
             <h2
-            v-if="pesanan.length != 0"
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                <p>Selamat berbelanja.</p>
-            </h2>
-            <h2
-            v-if="pesanan.length == 0"
-                class="text-xl font-semibold leading-tight text-gray-800"
-            >
-                <p>Anda belum memesan apapun.</p>
+                <p>List pesanan.</p>
             </h2>
         </template>
 
@@ -30,6 +24,11 @@ import { Head } from '@inertiajs/vue3';
                 >
                     <div class="p-6 text-gray-900">
                         <ul>
+                            <p
+                            v-if="pesanan.length === 0"
+                            class="text-gray-500"
+                            >anda belum memesan apapun.
+                            </p>
                             <li v-for="item in pesanan" :key="pesanan.id">
                                 <Orders :data="item" :rute="route"/>      
                             </li>

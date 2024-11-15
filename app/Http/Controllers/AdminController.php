@@ -124,6 +124,24 @@ class AdminController extends Controller
         }
     }
 
+    public function hapusMenu(Request $request) {
+
+        // Temukan pesanan berdasarkan ID dan hapus
+        $pesanan = Product::find($request->id);
+
+        if ($pesanan) {
+            // Jika pesanan ditemukan, hapus
+            $pesanan->delete();
+
+            // Mengembalikan response sukses ke frontend
+            return redirect()->route('admin.products')->with('success', 'Pesanan berhasil dibatalkan');
+        }
+
+        // Jika pesanan tidak ditemukan, kembalikan response error
+        return redirect()->route('admin.products')->with('error', 'Pesanan tidak ditemukan');
+
+    }
+
     public function editPesanan(Request $request) {
 
         $id = $request->id;
@@ -164,7 +182,7 @@ class AdminController extends Controller
         $fileName = md5(time()) . '.' . $extension;
 
         // Menentukan folder tujuan
-        $folder = 'img/products';
+        $folder = '/products';
 
         // Cek apakah folder ada, jika tidak ada maka buat folder tersebut
         if (!Storage::exists($folder)) {

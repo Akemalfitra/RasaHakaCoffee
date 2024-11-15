@@ -34,10 +34,10 @@
           <PrimaryButton>Edit</PrimaryButton>
         </Link>
         <Link
-            :href="route('admin.pesanan.hapus')"
+            :href="route('admin.menu.hapus')"
             :data="{ id: data.id}"
             as="button"
-            method="get"
+            method="post"
         >
           <PrimaryButton class="bg-red-600 hover:bg-red-700">Hapus</PrimaryButton>
         </Link>

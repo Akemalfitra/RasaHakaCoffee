@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/pesanan/proses', [AdminController::class, 'prosesPesanan'])->name('admin.pesanan.proses');
     Route::post('admin/pesanan/selesai', [AdminController::class, 'selesaiPesanan'])->name('admin.pesanan.selesai');
     Route::post('admin/pesanan/hapus', [AdminController::class, 'hapusPesanan'])->name('admin.pesanan.hapus');
+    Route::post('admin/menu/hapus', [AdminController::class, 'hapusMenu'])->name('admin.menu.hapus');
     Route::get('admin/menu/edit', [AdminController::class, 'editPesanan'])->name('admin.pesanan.edit');
     Route::post('admin/pesanan/hapus', [AdminController::class, 'hapusPesanan'])->name('admin.pesanan.hapus');
     Route::get('admin/manu/tambah', [AdminController::class, 'viewTambahMenu'])->name('admin.viewTambah.products');

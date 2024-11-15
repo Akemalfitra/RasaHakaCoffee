@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Pesanan" />
+    <Head title="Edit menu" />
 
     <AuthenticatedLayout>
 

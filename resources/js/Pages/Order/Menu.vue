@@ -1,7 +1,7 @@
 <template>
   <div class="block rounded-lg p-4 shadow-sm shadow-indigo-100">
     <img
-      alt=""
+      alt="Gambar"
       :src="'/img/products/' + data.gambar"
       class="h-56 w-full rounded-md object-cover"
     />

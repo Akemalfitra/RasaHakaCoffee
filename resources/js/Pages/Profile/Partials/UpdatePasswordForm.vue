@@ -37,12 +37,11 @@ const updatePassword = () => {
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900">
-                Update Password
+                Ganti password
             </h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Ensure your account is using a long, random password to stay
-                secure.
+                Pastikan akun Anda menggunakan kata sandi yang panjang dan acak agar tetap aman.
             </p>
         </header>
 
