@@ -73,7 +73,7 @@ const submit = () => {
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
                     <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
+                        >Ingat saya</span
                     >
                 </label>
             </div>
@@ -84,7 +84,7 @@ const submit = () => {
                     :href="route('register')"
                     class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                    Register here!
+                    Daftar disini!
                 </Link>
 
                 <PrimaryButton

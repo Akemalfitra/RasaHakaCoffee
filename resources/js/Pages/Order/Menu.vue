@@ -7,23 +7,24 @@
     />
   
     <div class="mt-2">
-      <dl>
-        <div>
-          <dt class="sr-only">Harga</dt>
-          <dd class="font-medium">{{ data.nama }}</dd>
-        </div>
-        <div>
-          <dt class="sr-only">Nama</dt>
-          <dd class="text-sm text-gray-500">Rp {{ data.harga }}</dd>
-        </div>
-        <div>
-          <dt class="sr-only">Jenis</dt>
-          <dd class="text-sm text-gray-500">{{ data.jenis }}</dd>
-        </div>
+      <div>
+        <h2 class="text-xl text-gray-500">{{ data.nama }}</h2>
+      </div>
 
-      </dl>
+      <div class="py-3">
+        <dl class="flex gap-10">
+          <div>
+            <dt>Harga</dt>
+            <dd class="text-sm text-gray-500">Rp {{ data.harga }}/porsi</dd>
+          </div>
+          <div>
+            <dt>Jenis</dt>
+            <dd class="text-sm text-gray-500">{{ data.jenis }}</dd>
+          </div>
+        </dl>
+      </div>
 
-        <div class="py-3">
+        <div class="pt-3">
           <PrimaryButton @click="addToCart(data)">Pesan</PrimaryButton>
       </div>
 

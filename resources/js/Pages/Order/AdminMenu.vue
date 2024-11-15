@@ -7,20 +7,22 @@
     />
   
     <div class="mt-2">
-      <dl>
-        <div>
-          <dt class="sr-only">Harga</dt>
-          <dd class="text-sm text-gray-500">Rp {{ data.harga }}</dd>
-        </div>
-        <div>
-          <dt class="sr-only">Nama</dt>
-          <dd class="font-medium">{{ data.nama }}</dd>
-        </div>
-      </dl>
- 
-      <div class="mt-1.5 sm:mt-0">
-        <dt class="text-gray-500">Jenis</dt>
-        <dd class="font-medium">{{ data.jenis }}</dd>
+
+      <div>
+        <h2 class="text-xl text-gray-500">{{ data.nama }}</h2>
+      </div>
+
+      <div class="py-3">
+        <dl class="flex gap-10">
+          <div>
+            <dt>Harga</dt>
+            <dd class="text-sm text-gray-500">Rp {{ data.harga }}/porsi</dd>
+          </div>
+          <div>
+            <dt>Jenis</dt>
+            <dd class="text-sm text-gray-500">{{ data.jenis }}</dd>
+          </div>
+        </dl>
       </div>
   
       <div class="mt-6 flex items-center gap-3 text-xs">
@@ -42,14 +44,14 @@
           <PrimaryButton class="bg-red-600 hover:bg-red-700">Hapus</PrimaryButton>
         </Link>
       </div>
-      </div>
+      </div>  
     </div>
   </div>
 </template>
 
 <script>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 
 export default {
   components: {
