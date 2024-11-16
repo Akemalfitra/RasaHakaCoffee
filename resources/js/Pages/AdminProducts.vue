@@ -22,15 +22,15 @@ import { Head } from '@inertiajs/vue3';
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
                     <div class="p-6 text-gray-900">
-                             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg flex">
-                                <div class="p-6 text-gray-900">
-                                    <ul class="grid sm:grid-cols-2 gap-6 grid-cols-1 md:grid-cols-3">
+                            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg flex">
+                            <div class="p-6 text-gray-900">
+                                <ul class="grid sm:grid-cols-2 gap-6 grid-cols-1 md:grid-cols-3">
                                     <li v-for="item in Product">
                                         <AdminMenu :data="item" />
                                     </li>
-                                    </ul>
-                                </div>
+                                </ul>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>

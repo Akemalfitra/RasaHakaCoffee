@@ -89,7 +89,7 @@ export default {
                   v-model="form.harga"
                   class="w-full rounded-lg border-gray-200 p-3 text-sm"
                   placeholder="Harga"
-                  type="text"
+                  type="number"
                   name="harga"
                 />
               </div>

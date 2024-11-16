@@ -45,7 +45,7 @@
                 <input
                   class="w-full rounded-lg border-gray-200 p-3 text-sm"
                   placeholder="harga"
-                  type="text"
+                  type="number"
                   name="harga"
                   :value="data[0].harga"
                 />

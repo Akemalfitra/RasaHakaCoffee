@@ -35,14 +35,7 @@
         >
           <PrimaryButton>Edit</PrimaryButton>
         </Link>
-        <Link
-            :href="route('admin.menu.hapus')"
-            :data="{ id: data.id}"
-            as="button"
-            method="post"
-        >
-          <PrimaryButton class="bg-red-600 hover:bg-red-700">Hapus</PrimaryButton>
-        </Link>
+        <Alert :data="data" :rute="'admin.menu.hapus'">Hapus</Alert>
       </div>
     </div>  
   </div>
@@ -54,14 +47,14 @@
 
 <script>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import DeleteUserForm from '../Profile/Partials/DeleteUserForm.vue';
+import Alert from '../../Components/AlertKonfirmasi.vue';
 import { Link } from '@inertiajs/vue3';
 
 export default {
   components: {
     PrimaryButton,
     Link,
-    DeleteUserForm
+    Alert
   },
   props: {
     data: {

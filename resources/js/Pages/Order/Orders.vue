@@ -75,18 +75,8 @@
             </div>
 
             <!-- Admin: Hapus Pesanan Button -->
-            <div v-if="userRole === 'admin'" class="flex">
-              <Link
-                v-if="['Pesanan selesai', 'Dibatalkan pembeli', 'Dibatalkan penjual'].includes(item.order_status)"
-                :href="route(rute[4])"
-                :data="{ id: item.id }"
-                as="button"
-                method="post"
-              >
-                <PrimaryButton class="bg-red-600 hover:bg-red-700">
-                  Hapus data pesanan
-                </PrimaryButton>
-              </Link>
+            <div v-if="userRole === 'admin'" class="flex mt-3">
+                <Alert :data="item" :rute="'admin.pesanan.hapus'" v-if="item.order_status === 'Pesanan selesai'"/>
             </div>
 
           </div>
@@ -100,11 +90,13 @@
 <script>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import Alert from '../../Components/AlertKonfirmasi.vue';
 
 export default {
   components: {
     PrimaryButton,
     Link,
+    Alert
   },
   props: {
     data: {
