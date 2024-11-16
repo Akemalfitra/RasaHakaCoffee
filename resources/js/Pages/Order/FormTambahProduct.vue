@@ -1,7 +1,11 @@
 <script>
 import { useForm } from '@inertiajs/vue3';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 export default {
+  components: {
+    PrimaryButton
+  },
   setup() {
     // Form setup with useForm
     const form = useForm({
@@ -52,9 +56,9 @@ export default {
           </p>
   
           <div class="mt-8">
-            <a href="#" class="text-2xl font-bold text-yellow-600"> RM Simangat </a>
+            <span class="text-2xl font-bold text-yellow-600"> RM Simangat </span>
   
-            <address class="mt-2 not-italic">Lhokseumawe, Hagu Barat Laut. </address>
+            <address class="mt-2 not-italic text-gray-500">Lhokseumawe, Hagu Barat Laut. </address>
           </div>
         </div>
   
@@ -107,12 +111,12 @@ export default {
             </div>
   
             <div class="mt-4">
-              <button
+              <PrimaryButton
                 type="submit"
-                class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
+                class="inline-block w-full rounded-lg bg-black px-2 py-2 font-medium text-white sm:w-auto"
               >
                 Tambah data
-              </button>
+              </PrimaryButton>
             </div>
           </form>
         </div>

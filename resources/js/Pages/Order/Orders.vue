@@ -11,8 +11,8 @@
           <dd class="font-medium text-gray-900">Status Pesanan : {{ item.order_status }}</dd>
           <dd class="text-gray-900 font-bold text-lg">Total bayar : Rp {{ item.total_harga }},-</dd>
 
-          <div class="flex-wrap sm:flex gap-3 sm:col-span-4 justify-around">
-            <div class="flex gap-3 py-3">
+          <div class="flex-wrap sm:flex gap-3 sm:col-span-4 justify-start">
+            <div class="flex gap-3 py-5">
               <div class="flex gap-2">
                 <!-- Batalkan Pesanan Button -->
                 <Link
