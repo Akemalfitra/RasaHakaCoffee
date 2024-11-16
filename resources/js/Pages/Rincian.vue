@@ -34,6 +34,9 @@ import { Head } from '@inertiajs/vue3';
                                     </dl>
                                 </div>
                             </li>
+                            <div>
+                                <h1 class="p-2 font-extrabold">Total bayar :  {{ order[0].total_harga }}</h1>
+                            </div>
                             <div class="py-3">
                                 <PrimaryButton
                                     @click="goBack"
@@ -54,7 +57,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 export default {
     props: {
-        pesanan : Array
+        pesanan: Array,
+        order: Array
     },
     components: {
         Orders,

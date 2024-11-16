@@ -157,7 +157,7 @@ const showingNavigationDropdown = ref(false);
                             :href="route('dashboard')"
                             :active="route().current('dashboard')"
                         >
-                            Dashboard
+                            Daftar menu
                         </ResponsiveNavLink>
                     </div>
                     <div class="space-y-1 pb-3 pt-2">
@@ -165,7 +165,7 @@ const showingNavigationDropdown = ref(false);
                             :href="route('pesanan')"
                             :active="route().current('pesanan')"
                         >
-                            Pesanan
+                            Pesanan anda
                         </ResponsiveNavLink>
                     </div>
 

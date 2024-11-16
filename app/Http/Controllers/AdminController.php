@@ -24,14 +24,15 @@ class AdminController extends Controller
 
     public function rincianPesanan(Request $request) {
 
-        $user_id = $request->id;
+        $id = $request->id;
+    
+        $order = Orders::where('id', $id)->get();
         
-        $pesanan = Orders::with('user')->get();
-        
-        $pesanan = OrderItems::with('product')->where('order_id', $user_id)->get();
+        $pesanan = OrderItems::with('product')->where('order_id', $id)->get();
 
         return Inertia::render('AdminRincian', [
         'pesanan' => $pesanan,
+        'order' => $order
         ]);
     }
 

@@ -16,7 +16,7 @@ import { Head } from '@inertiajs/vue3';
     </template>
 
   <div class="relative w-full sm:h-64 h-36 overflow-hidden">
-    <img src="img/background.jpg" alt="" class="w-full sm:h-auto h-36 overflow-hidden">
+    <img src="img/background.jpg" alt="" class="w-full sm:h-auto h-64 overflow-hidden">
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
       <h1 class="text-xl font-semibold leading-tight text-white">
         RM Simangat

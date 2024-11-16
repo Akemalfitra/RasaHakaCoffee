@@ -74,12 +74,13 @@ class OrderController extends Controller
     public function rincianPesanan(Request $request) {
         $order_id = $request->id;
    
-        $pesanan = OrderItems::with('product')  // Melakukan eager loading pada relasi 'product'
-        ->where('order_id', $order_id)      // Menyaring berdasarkan order_id
-        ->get();
+        $order = Orders::where('id', $order_id)->get();
+
+        $pesanan = OrderItems::with('product')->where('order_id', $order_id)->get();
 
         return Inertia::render('Rincian', [
         'pesanan' => $pesanan,
+        'order' => $order
         ]);
     }
 }
