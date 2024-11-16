@@ -44,19 +44,24 @@
           <PrimaryButton class="bg-red-600 hover:bg-red-700">Hapus</PrimaryButton>
         </Link>
       </div>
-      </div>  
-    </div>
+    </div>  
   </div>
+</div>
 </template>
+
+
+
 
 <script>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import DeleteUserForm from '../Profile/Partials/DeleteUserForm.vue';
 import { Link } from '@inertiajs/vue3';
 
 export default {
   components: {
     PrimaryButton,
-    Link
+    Link,
+    DeleteUserForm
   },
   props: {
     data: {

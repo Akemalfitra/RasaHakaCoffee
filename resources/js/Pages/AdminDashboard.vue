@@ -8,13 +8,24 @@ import { Head } from '@inertiajs/vue3';
     <Head title="Admin" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800"
-            >
-                Pesanan Pelanggan
+            <template #header>
+                <div>
+                    <a href="#" class="text-2xl font-bold text-yellow-600"> Admin RM Simangat </a>
+                    <address class="mt-2 not-italic">Lhokseumawe, Hagu Barat Laut.</address>
+                </div>
+            </template>
+
+        <div class="relative w-full sm:h-64 h-36 overflow-hidden">
+            <img src="img/background.jpg" alt="" class="w-full sm:h-auto h-36 overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <h1 class="text-xl font-semibold leading-tight text-white">
+                RM Simangat
+            </h1>
+            <h2 class="sm:text-xl text-sm font-semibold leading-tight text-white">
+                Nikmati Hidangan Spesial Kami, Rasakan Kelezatan Disetiap Gigitannya Simangat Bertoh-Mangat.
             </h2>
-        </template>
+            </div>
+        </div>
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">

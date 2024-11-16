@@ -27,7 +27,6 @@ import { Head } from '@inertiajs/vue3';
     </div>
   </div>
 
-
     <Cart 
       :cart="cart" 
       :isVisible="isCartVisible" 
@@ -80,44 +79,43 @@ export default {
   },
   data() {
     return {
-      cart: this.loadCart(),  // Memuat cart dari Local Storage
+      cart: this.loadCart(),
       isCartVisible: false,
     };
   },
   methods: {
-    // Fungsi untuk menambah produk ke keranjang
     addToCart(product) {
       const existingProductIndex = this.cart.findIndex(item => item.id === product.id);
 
       if (existingProductIndex !== -1) {
-        // Jika produk sudah ada di cart, tingkatkan quantity-nya
+        
         this.cart[existingProductIndex].quantity += 1;
       } else {
-        // Jika produk belum ada, tambahkan produk baru dengan quantity 1
+        
         this.cart.push({ ...product, quantity: 1 });
       }
 
-      this.saveCart();  // Simpan ke Local Storage setiap kali cart berubah
+      this.saveCart(); 
     },
-    // Menghapus produk dari cart
+  
     removeFromCart(index) {
       this.cart.splice(index, 1);
-      this.saveCart();  // Simpan perubahan ke Local Storage
+      this.saveCart(); 
     },
-    // Menyimpan cart ke Local Storage
+    
     saveCart() {
       localStorage.setItem('cart', JSON.stringify(this.cart));
     },
-    // Memuat cart dari Local Storage
+    
     loadCart() {
       const savedCart = localStorage.getItem('cart');
-      return savedCart ? JSON.parse(savedCart) : [];  // Kembalikan cart yang tersimpan atau array kosong
+      return savedCart ? JSON.parse(savedCart) : [];  
     },
-    // Membuka modal cart
+    
     openCart() {
       this.isCartVisible = true;
     },
-    // Menutup modal cart
+    
     closeCart() {
       this.isCartVisible = false;
     },
@@ -125,32 +123,27 @@ export default {
 
       const totalPrice = this.cart.reduce((total, item) => total + (item.harga * item.quantity), 0);
 
-      // Membuat data cart hanya dengan id dan quantity
       const cartData = this.cart.map(item => ({
-        productId: item.id,       // Ambil id produk
+        productId: item.id,
         harga: item.harga,
         quantity: item.quantity,
       }));
 
-      // Menggunakan useForm untuk membuat form data
       const form = useForm({
         userId: this.$page.props.auth.user.id,
-        cart: cartData,  // Mengirim data cart yang sudah disesuaikan
+        cart: cartData,  
         jumlah: totalPrice
       });
 
-      // Kirim form data ke route checkout
       form.post(route('checkout'), {
         onFinish: () => {
-          this.clear();  // Kosongkan cart setelah checkout berhasil
+          this.clear(); 
         },
       });
     },
     clear() {
-        // Menghapus cart dari localStorage
-        localStorage.removeItem('cart'); // Jika kamu menyimpan cart di localStorage dengan key 'cart'
-
-        // Mengosongkan array cart di memori
+        
+        localStorage.removeItem('cart'); 
         this.cart.length = 0;
         this.isCartVisible = false;
     }
