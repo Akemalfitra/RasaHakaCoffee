@@ -23,6 +23,11 @@ class RegisteredUserController extends Controller
         return Inertia::render('Auth/Register');
     }
 
+    public function createAdmin(): Response
+    {
+        return Inertia::render('Auth/RegisterAdmin');
+    }
+
     /**
      * Handle an incoming registration request.
      *
@@ -47,5 +52,25 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
+    }
+
+    public function storeAdmin(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'admin'
+        ]);
+
+        return response()->json([
+            'message' => 'Admin baru berhasil dibuat',
+        ], 201);
     }
 }

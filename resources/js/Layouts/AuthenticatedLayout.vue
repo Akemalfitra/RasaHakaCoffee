@@ -94,7 +94,7 @@ const showingNavigationDropdown = ref(false);
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            Keluar
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
@@ -193,7 +193,7 @@ const showingNavigationDropdown = ref(false);
                                 method="post"
                                 as="button"
                             >
-                                Log Out
+                                Keluar
                             </ResponsiveNavLink>
                         </div>
                     </div>

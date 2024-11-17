@@ -7,6 +7,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 
 
@@ -35,12 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/pesanan/hapus', [AdminController::class, 'hapusPesanan'])->name('admin.pesanan.hapus');
     Route::get('admin/manu/tambah', [AdminController::class, 'viewTambahMenu'])->name('admin.viewTambah.products');
     Route::post('admin/manu/tambahMenu', [AdminController::class, 'tambahMenu'])->name('admin.tambah.products');
-    Route::get('/admin/profile', [ProfileController::class, 'editAdmin'])->name('profile.edit.admin');
-    
+    Route::get('/admin/profile', [ProfileController::class, 'editAdmin'])->name('profile.edit.admin');    
 });
-
-
-
 
 
 require __DIR__.'/auth.php';

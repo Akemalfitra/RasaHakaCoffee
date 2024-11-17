@@ -1,6 +1,17 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import Orders from './Order/Orders.vue';
+import { defineComponent } from 'vue';
+
+defineProps({
+    pesanan: Object,
+    route: Array
+})
+
+defineComponent({
+    Orders
+})
 
 </script>
 
@@ -39,17 +50,3 @@ import { Head } from '@inertiajs/vue3';
         </div>
     </AuthenticatedLayout>
 </template>
-
-<script>
-import Orders from './Order/Orders.vue';
-
-export default {
-    props: {
-        pesanan: Object,
-        route: Array
-    },
-    components: {
-        Orders,
-    }
-}
-</script>

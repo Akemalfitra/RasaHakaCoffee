@@ -1,6 +1,19 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayoutAdmin.vue';
 import { Head } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+
+// Mendefinisikan props
+const props = defineProps({
+  pesanan: Array,
+  order: Array,
+});
+
+// Fungsi untuk kembali ke halaman sebelumnya
+const goBack = () => {
+  window.history.back();
+};
 
 </script>
 
@@ -50,24 +63,3 @@ import { Head } from '@inertiajs/vue3';
         </div>
     </AuthenticatedLayout>
 </template>
-
-<script>
-import Orders from './Order/Orders.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-
-export default {
-    props: {
-        pesanan: Array,
-        order: Array
-    },
-    components: {
-        Orders,
-        PrimaryButton,
-    },
-      methods: {
-        goBack() {
-            window.history.back(); // Kembali ke halaman sebelumnya
-        }
-    }
-  }
-</script>

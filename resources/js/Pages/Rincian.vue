@@ -35,7 +35,7 @@ import { Head } from '@inertiajs/vue3';
                                 </div>
                             </li>
                             <div>
-                                <h1 class="p-2 font-extrabold">Total bayar :  Rp {{ order[0].total_harga }},-</h1>
+                                <h1 class="p-2 py-5 font-extrabold text-xl">Total bayar :  Rp {{ order[0].total_harga }},-</h1>
                             </div>
                             <div class="py-3">
                                 <PrimaryButton

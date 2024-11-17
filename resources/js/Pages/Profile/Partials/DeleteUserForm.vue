@@ -47,8 +47,7 @@ const closeModal = () => {
 
             <p class="mt-1 text-sm text-gray-600">
                 Setelah akun Anda dihapus, semua sumber daya dan datanya akan dihapus
-                dihapus secara permanen. Mohon sebelum menghapus akun Anda
-                mengunduh data atau informasi apa pun yang ingin Anda simpan.
+                dihapus secara permanen.
             </p>
         </header>
 
@@ -64,8 +63,7 @@ const closeModal = () => {
 
                 <p class="mt-1 text-sm text-gray-600">
                     Setelah akun Anda dihapus, semua sumber daya dan datanya akan dihapus
-                    dihapus secara permanen. Mohon sebelum menghapus akun Anda
-                    mengunduh data atau informasi apa pun yang ingin Anda simpan.
+                    dihapus secara permanen.
                 </p>
 
                 <div class="mt-6">

@@ -1,50 +1,50 @@
-<script>
+<script setup>
 import { useForm } from '@inertiajs/vue3';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import Swal from 'sweetalert2'; 
 
-export default {
-  components: {
-    PrimaryButton
-  },
-  setup() {
-    // Form setup with useForm
-    const form = useForm({
-      nama: '',
-      jenis: '',
-      harga: '',
-      gambar: null, // Menambahkan field foto
-    });
+const form = useForm({
+  nama: '',
+  jenis: '',
+  harga: '',
+  gambar: null, 
+});
 
-    // Function to handle file input change
-    const handleFileChange = (event) => {
-      form.gambar = event.target.files[0]; // Set the selected file to form.foto
-    };
+const handleFileChange = (event) => {
+  form.gambar = event.target.files[0]; 
+};
 
-    // Submit function
-    const submit = () => {
-      const formData = new FormData();
-
-      // Append all form fields to FormData
-      formData.append('nama', form.nama);
-      formData.append('jenis', form.jenis);
-      formData.append('harga', form.harga);
-      formData.append('gambar', form.gambar); // Append file here
-
-      // Send the form data using Inertia's post method
-      form.post(route('admin.tambah.products'), {
-        data: formData,
-        onFinish: () => form.reset(),
+const submit = () => {
+  form.post(route('admin.tambah.products'), {
+    onSuccess: () => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Product Added!',
+        text: 'Your product has been successfully added.',
+        showConfirmButton: true,
       });
-    };
-
-    return {
-      form,
-      handleFileChange,
-      submit
-    };
-  }
+      form.reset(); 
+    },
+    onError: (errors) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong, please try again.',
+        showConfirmButton: true,
+      });
+    },
+    onFinish: () => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Menu berhasil di tambahkan !',
+        text: 'The form has been submitted and processed.',
+        showConfirmButton: true,
+      });
+    }
+  });
 };
 </script>
+
 
 <template>
   <section class="bg-gray-100">
@@ -113,7 +113,7 @@ export default {
             <div class="mt-4">
               <PrimaryButton
                 type="submit"
-                class="inline-block w-full rounded-lg bg-black px-2 py-2 font-medium text-white sm:w-auto"
+                class="inline-block  rounded-lg bg-black px-2 py-2 font-medium text-white sm:w-auto"
               >
                 Tambah data
               </PrimaryButton>

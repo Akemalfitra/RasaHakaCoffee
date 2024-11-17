@@ -1,3 +1,39 @@
+<script setup>
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import Alert from '../../Components/AlertKonfirmasi.vue';
+import { defineComponent } from 'vue';
+import { defineProps } from 'vue';
+import { computed } from 'vue';
+
+defineComponent({
+  PrimaryButton,
+  Link,
+  Alert
+})
+
+defineProps({
+  data: {
+    type : Object,
+    required : true
+  },
+  rute: {
+    type : Array,
+    required : true
+  }
+})
+
+const userRole = computed(() => usePage().props.auth.user.role);
+
+const formatDate = (date) => {
+  return new Intl.DateTimeFormat('id-ID', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).format(new Date(date));
+};
+</script>
+
 <template>
   <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
     <dl class="-my-3 divide-y divide-gray-100 text-sm">
@@ -6,15 +42,14 @@
           <dd class="font-medium text-gray-900">ID Pesanan : {{ item.id }}</dd>
           <dd class="font-medium text-gray-900">Atas nama : {{ item.user.name }}</dd>
           <dd class="font-medium text-gray-900">Email pemesan : {{ item.user.email }}</dd>
-          <!-- Menggunakan Intl.DateTimeFormat untuk format tanggal -->
           <dd class="font-medium text-gray-900">Tanggal di pesan : {{ formatDate(item.user.created_at) }}</dd>
           <dd class="font-medium text-gray-900">Status Pesanan : {{ item.order_status }}</dd>
-          <dd class="text-gray-900 font-bold text-lg">Total bayar : Rp {{ item.total_harga }},-</dd>
+        </div>
 
-          <div class="flex-wrap sm:flex gap-3 sm:col-span-4 justify-start">
-            <div class="flex gap-3 py-5">
+        <dd class="font-bold text-lg p-3">Total bayar : Rp {{ item.total_harga }},-</dd>
+
+          <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-2">
               <div class="flex gap-2">
-                <!-- Batalkan Pesanan Button -->
                 <Link
                   :href="route(rute[1])"
                   :data="{ id: item.id }"
@@ -29,7 +64,6 @@
                   </PrimaryButton>
                 </Link>
 
-                <!-- Rincian Pesanan Button -->
                 <Link
                   :href="route(rute[0])"
                   :data="{ id: item.id}"
@@ -40,8 +74,8 @@
                 </Link>
               </div>
 
-              <!-- Admin Controls -->
-              <div v-if="userRole === 'admin'" class="flex gap-3">
+
+              <div v-if="userRole === 'admin'" class="flex gap-2">
                 <!-- Proses Pesanan Button -->
                 <Link
                   :href="route(rute[2])"
@@ -72,53 +106,17 @@
                   </PrimaryButton>
                 </Link>
               </div>
-            </div>
+            <!-- </div> -->
 
             <!-- Admin: Hapus Pesanan Button -->
-            <div v-if="userRole === 'admin'" class="flex mt-3">
-                <Alert :data="item" :rute="'admin.pesanan.hapus'" v-if="item.order_status === 'Pesanan selesai'"/>
+            <div v-if="userRole === 'admin'">
+                <Alert :data="item" :rute="'admin.pesanan.hapus'" v-if="item.order_status === 'Pesanan selesai'" class="p-3" />
             </div>
 
           </div>
-
-        </div>
+       
       </div>
     </dl>
   </div>
 </template>
 
-<script>
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Link, usePage } from '@inertiajs/vue3';
-import Alert from '../../Components/AlertKonfirmasi.vue';
-
-export default {
-  components: {
-    PrimaryButton,
-    Link,
-    Alert
-  },
-  props: {
-    data: {
-      required: true
-    },
-    rute: {
-      required: true
-    }
-  },
-  computed: {
-    userRole() {
-      return usePage().props.auth.user.role;
-    }
-  },
-  methods: {
-    formatDate(date) {
-      return new Intl.DateTimeFormat('id-ID', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      }).format(new Date(date));
-    }
-  }
-}
-</script>

@@ -35,20 +35,22 @@
         >
           <PrimaryButton>Edit</PrimaryButton>
         </Link>
-        <Alert :data="data" :rute="'admin.menu.hapus'">Hapus</Alert>
+
+        <PrimaryButton
+        @click="showAlert"
+          >Hapus</PrimaryButton>
+
       </div>
     </div>  
   </div>
 </div>
 </template>
 
-
-
-
 <script>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import Alert from '../../Components/AlertKonfirmasi.vue';
 import { Link } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
 
 export default {
   components: {
@@ -60,6 +62,67 @@ export default {
     data: {
       required: true
     }
-  }
+  },
+  methods: {
+  // Show confirmation alert to delete menu
+  async showAlert() {
+    try {
+      const result = await Swal.fire({
+        title: `Apakah anda ingin menghapus menu ${this.data?.nama} ?`,
+        text: '',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus!',
+      });
+
+      if (result.isConfirmed) {
+        await this.deleteMenu();  // Proceed to delete the menu if confirmed
+      }
+    } catch (error) {
+      console.error('Error showing alert:', error);
+    }
+  },
+
+  // Handle menu deletion
+  async deleteMenu() {
+    try {
+      // Validate that this.data and this.data.id are defined before making a request
+      if (!this.data || !this.data.id) {
+        throw new Error('Data ID is missing.');
+      }
+
+      // Perform the deletion request using Inertia
+      const response = await this.$inertia.post(route('admin.menu.hapus', { id: this.data.id }));
+
+      // Show success alert upon successful deletion
+      await Swal.fire({
+        title: 'Deleted!',
+        text: 'Menu berhasil dihapus.',
+        icon: 'success',
+      });
+
+      // Call onFinish after deletion is confirmed
+      this.onFinish();
+    } catch (error) {
+      // Show error alert in case of failure
+      await Swal.fire({
+        title: 'Error!',
+        text: error.response?.data.message || 'There was an issue deleting the menu.',
+        icon: 'error',
+      });
+
+      // Call onFinish after error is displayed
+      this.onFinish();
+    }
+  },
+
+  // Final alert after delete operation completes (either success or error)
+  async onFinish() {
+    
+  },
+}
+
 };
 </script>

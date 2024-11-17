@@ -133,11 +133,10 @@ class AdminController extends Controller
 
             $produk->delete();
 
-            return redirect()->route('admin.products')->with('success', 'Produk berhasil dihapus');
+            return redirect()->route('admin.products');
         }
 
-        return redirect()->route('admin.products')->with('error', 'Produk tidak ditemukan');
-
+           return redirect()->route('admin.products')->with('error', 'Menu gagal di hapus !');
     }
 
     public function editPesanan(Request $request) {
@@ -166,34 +165,29 @@ class AdminController extends Controller
 
     // Upload foto ke server
     if ($request->hasFile('gambar')) {
-        // Mendapatkan ekstensi file
+        
         $extension = $request->gambar->getClientOriginalExtension();
         
-        // Membuat nama file baru dengan hash
         $fileName = md5(time()) . '.' . $extension;
 
-        // Menentukan folder tujuan
         $folder = ('/img/products');
 
-        // Cek apakah folder ada, jika tidak ada maka buat folder tersebut
         if (!Storage::exists($folder)) {
             Storage::makeDirectory($folder);
         }
-
-        // Simpan file ke folder yang sudah ditentukan
+        
         $request->gambar->storeAs($folder, $fileName);
         
     }
 
-    // Simpan data ke database
     Product::create([
         'nama' => $request->nama,
         'jenis' => $request->jenis,
         'harga' => $request->harga,
-        'gambar' => $fileName ?? null, // Menyimpan path foto
+        'gambar' => $fileName ?? null,
     ]);
 
-    // Cek apakah data berhasil disimpan dan redirect atau response
-    return redirect()->route('admin.viewTambah.products')->with('success', 'Menu berhasil ditambahkan.');
+    return redirect()->route('admin.viewTambah.products');
+    
     }
 }
