@@ -36,8 +36,8 @@ const submit = () => {
     onFinish: () => {
       Swal.fire({
         icon: 'success',
-        title: 'Menu berhasil di tambahkan !',
-        text: 'The form has been submitted and processed.',
+        title: 'Ditambahkan !',
+        text: 'Berhasil menambahkan daftar  menu !.',
         showConfirmButton: true,
       });
     }
