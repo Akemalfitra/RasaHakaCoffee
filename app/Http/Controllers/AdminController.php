@@ -135,13 +135,67 @@ class AdminController extends Controller
            return redirect()->route('admin.products')->with('error', 'Menu gagal di hapus !');
     }
 
-    public function editPesanan(Request $request) {
+    public function viewEditMenu(Request $request) {
 
         $id = $request->id;
 
         $product = Product::where('id', $id)->get();
 
         return Inertia::render('AdminEditProducts', ['product' => $product]);
+    }
+
+    public function editMenu(Request $request) {
+
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'jenis' => 'required',
+            'harga' => 'required',
+            'foto' => 'nullable'
+        ]);
+
+        // Find the product by ID
+        $product = Product::findOrFail($request->id);
+
+        // Update product data
+        $product->nama = $validated['name'];
+        $product->jenis = $validated['jenis'];
+        $product->harga = $validated['harga'];
+    
+        // If a new image is uploaded, process and store it
+        if ($request->hasFile('foto')) {
+            // Get the extension of the uploaded file
+            $extension = $request->foto->getClientOriginalExtension();
+
+            // Hash the filename using md5 with the current timestamp
+            $fileName = md5(time()) . '.' . $extension;
+
+            // Define the folder to store the image
+            $folder = 'img/products';
+
+            // Ensure the directory exists
+            if (!Storage::exists($folder)) {
+                Storage::makeDirectory($folder);
+            }
+
+            // Store the new image and update the product's gambar attribute
+            $request->foto->storeAs($folder, $fileName);
+
+            // If there's an existing image, delete it from storage
+            if ($product->foto && Storage::exists($product->foto)) {
+                Storage::delete($product->foto);
+            }
+
+            // Update the 'gambar' field with the new hashed filename
+            $product->gambar = $fileName;
+        }
+
+        // Save the updated product
+        $product->save();
+
+        // Redirect back or to another page with a success message
+        return redirect()->route('admin.menu.edit')->with('success', 'Product updated successfully!');
+
     }
 
     public function ViewTambahMenu() {

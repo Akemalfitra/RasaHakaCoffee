@@ -45,8 +45,7 @@ import AdminMenu from './Order/AdminMenu.vue';
 
 export default {
     props: {
-        Product: Array,
-        route
+        Product: Array
     },
     components: {
         Orders,

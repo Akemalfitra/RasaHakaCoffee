@@ -28,7 +28,7 @@
       <div class="mt-6 flex items-center gap-3 text-xs">
         <div class="flex gap-2 sm:shrink-0 sm:items-center sm:gap-2">
            <Link
-            :href="route('admin.pesanan.edit')"
+            :href="route('admin.menu.edit')"
             :data="{ id: data.id}"
             as="button"
             method="get"

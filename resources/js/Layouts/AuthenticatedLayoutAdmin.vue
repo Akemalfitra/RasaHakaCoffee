@@ -165,7 +165,7 @@ const showingNavigationDropdown = ref(false);
                             :href="route('admin.products')"
                             :active="route().current('admin.products')"
                         >
-                            Daftar menu
+                            Daftar Menu
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
                             :href="route('admin.viewTambah.products')"
