@@ -67,6 +67,7 @@ const submit = () => {
             <div>
               <label class="sr-only" for="nama">Nama menu</label>
               <input
+                required
                 v-model="form.nama"
                 class="w-full rounded-lg border-gray-200 p-3 text-sm"
                 placeholder="Nama menu"
@@ -79,6 +80,7 @@ const submit = () => {
               <div>
                 <label class="sr-only" for="jenis">Jenis menu</label>
                 <input
+                  required
                   v-model="form.jenis"
                   class="w-full rounded-lg border-gray-200 p-3 text-sm"
                   placeholder="Jenis menu"
@@ -90,6 +92,7 @@ const submit = () => {
               <div>
                 <label class="sr-only" for="harga">Harga</label>
                 <input
+                  required
                   v-model="form.harga"
                   class="w-full rounded-lg border-gray-200 p-3 text-sm"
                   placeholder="Harga"
@@ -103,6 +106,7 @@ const submit = () => {
               <label class="sr-only" for="gambar">Foto</label>
               <p class="py-3">Upload foto menu <span class="text-gray-400">(maksimal 2mb).</span></p>
               <input
+                required
                 @change="handleFileChange"
                 class="w-full rounded-lg border-gray-200 p-3 text-sm"
                 type="file"

@@ -38,7 +38,9 @@ class OrderController extends Controller
         $user_id = Auth::id(); 
 
         // Ambil pesanan berdasarkan user_id
-        $pesanan = Orders::with('user')->where('user_id', $user_id)->get();
+        $pesanan = Orders::with('user')->where('user_id', $user_id)->orderBy('created_at', 'desc') 
+            ->get();
+        
 
         // Kelompokkan berdasarkan tanggal 'created_at' (hanya tanggalnya saja)
         $groupedPesanan = $pesanan->groupBy(function($item) {

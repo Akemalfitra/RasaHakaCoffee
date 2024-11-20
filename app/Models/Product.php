@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+
     use HasFactory;
 
-    // Menentukan nama tabel yang terkait dengan model ini
     protected $table = 'products';
 
-    // Menentukan kolom-kolom yang boleh diisi secara massal (mass assignable)
     protected $fillable = [
         'nama',
         'jenis',
@@ -24,7 +22,7 @@ class Product extends Model
 
     public function order()
     {
-        return $this->belongsTo(Orders::class);  // Setiap produk milik satu order
+        return $this->belongsTo(Orders::class); 
     }
 
     public function orderItems()

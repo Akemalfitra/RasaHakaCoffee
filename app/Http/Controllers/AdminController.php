@@ -13,13 +13,13 @@ class AdminController extends Controller
 {
     public function index() {
 
-        $pesanan = Orders::with("user")->get();
+        $pesanan = Orders::with("user")
+            ->orderBy('created_at', 'desc') 
+            ->get();
 
         return Inertia::render('AdminDashboard', [
-            'pesanan' => $pesanan,
-            'route' => ["rincian.admin", "admin.pesanan.batalkan", "admin.pesanan.proses", "admin.pesanan.selesai", "admin.pesanan.hapus" ]
+            'pesanan' => $pesanan
         ]);
-        
     }
 
     public function rincianPesanan(Request $request) {
@@ -49,18 +49,17 @@ class AdminController extends Controller
 
         try {
 
-            // Temukan pesanan berdasarkan ID
             $pesanan = Orders::findOrFail($request->id);
 
-            // Ubah status pesanan menjadi 'dibatalkan'
             $pesanan->order_status = 'Dibatalkan penjual';
             
-            $pesanan->save(); // Simpan perubahan ke database
+            $pesanan->save();
 
-            // Mengembalikan response sukses ke frontend
+
             return redirect()->route('admin.dashboard')->with('success', 'Pesanan berhasil dibatalkan');
+
         } catch (\Exception $e) {
-            // Jika terjadi kesalahan
+            
             return redirect()->route('admin.dashboard')->with('error', 'Terjadi kesalahan saat membatalkan pesanan');
         }
     }
@@ -69,37 +68,34 @@ class AdminController extends Controller
 
         try {
 
-            // Temukan pesanan berdasarkan ID
             $pesanan = Orders::findOrFail($request->id);
 
-            // Ubah status pesanan menjadi 'dibatalkan'
             $pesanan->order_status = 'Pesanan diproses';
             
-            $pesanan->save(); // Simpan perubahan ke database
+            $pesanan->save(); 
 
-            // Mengembalikan response sukses ke frontend
             return redirect()->route('admin.dashboard')->with('success', 'Pesanan berhasil dibatalkan');
+
         } catch (\Exception $e) {
-            // Jika terjadi kesalahan
+
             return redirect()->route('admin.dashboard')->with('error', 'Terjadi kesalahan saat membatalkan pesanan');
         }
     }
     
     public function selesaiPesanan(Request $request) {
 
-        // Temukan pesanan berdasarkan ID
         $pesanan = Orders::find($request->id);
 
         if ($pesanan) {
-            // Ubah status pesanan menjadi 'Pesanan selesai'
+
             $pesanan->order_status = 'Pesanan selesai';
             
-            $pesanan->save(); // Simpan perubahan ke database
+            $pesanan->save(); 
 
-            // Mengembalikan response sukses ke frontend
             return redirect()->route('admin.dashboard')->with('success', 'Pesanan berhasil dibatalkan');
+
         } else {
-            // Jika pesanan tidak ditemukan, kembalikan response error
+            
             return redirect()->route('admin.dashboard')->with('error', 'Pesanan tidak ditemukan');
         }
     }
@@ -155,15 +151,13 @@ class AdminController extends Controller
 
     public function tambahMenu(Request $request) {
 
-    // Validasi data yang diterima
     $request->validate([
         'nama' => 'required',
         'jenis' => 'required',
         'harga' => 'required',
-        'gambar' => 'required', // Validasi foto
+        'gambar' => 'required', 
     ]);
 
-    // Upload foto ke server
     if ($request->hasFile('gambar')) {
         
         $extension = $request->gambar->getClientOriginalExtension();
