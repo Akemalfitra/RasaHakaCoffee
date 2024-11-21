@@ -22,7 +22,7 @@ import { Head } from '@inertiajs/vue3';
                 RM Simangat
             </h1>
             <h2 class="sm:text-xl text-sm font-semibold leading-tight text-white">
-                Nikmati Hidangan Spesial Kami, Rasakan Kelezatan Disetiap Gigitannya Simangat Bertoh-Mangat.
+                Nikmati Hidangan Spesial Kami, Rasakan Kelezatan Disetiap Gigitannya Simangat Bertoh-Mangat. 
             </h2>
             </div>
         </div>

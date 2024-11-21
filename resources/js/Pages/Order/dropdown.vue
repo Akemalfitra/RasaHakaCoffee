@@ -83,7 +83,7 @@ export default {
     },
     confirmAction(actionText, route) {
       Swal.fire({
-        title: `Apakah Anda yakin ingin ${actionText}?`,
+        title: `${actionText}?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Ya, lanjutkan',
