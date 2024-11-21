@@ -27,10 +27,6 @@ class OrderController extends Controller
                 'harga' => $item['harga'],
             ]);
         }
-
-        return response()->json([
-            'message' => 'Order berhasil dibuat',
-        ], 201);
     }
     
     public function getPesanan() {

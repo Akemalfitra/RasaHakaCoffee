@@ -36,7 +36,7 @@ import { Head } from '@inertiajs/vue3';
                         <ul>
                             <p v-if="pesanan.length === 0" class="text-gray-500">Belum ada pesanan dari pelanggan.</p>
                             <li v-if="pesanan.length != 0">
-                                <Orders :data="pesanan" :rute="route"/>      
+                                <Orders :data="pesanan"/>      
                             </li>
                         </ul>
                     </div>
@@ -52,8 +52,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 export default {
     props: {
-        pesanan: Array,
-        route: Array
+        pesanan: Array
     },
     components: {
         Orders,

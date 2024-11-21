@@ -4,22 +4,15 @@ import { Link, usePage } from '@inertiajs/vue3';
 import { computed, defineProps } from 'vue';
 import dropdown from './dropdown.vue';
 
-// Definisikan props yang diterima oleh komponen
 const props = defineProps({
   data: {
-    type: Array,  // Menggunakan Array karena data adalah array dalam template
-    required: true
-  },
-  rute: {
-    type: Array,
+    type: Array,  
     required: true
   }
 });
 
-// Ambil informasi userRole dari halaman
 const userRole = computed(() => usePage().props.auth.user.role);
 
-// Fungsi format tanggal
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('id-ID', {
     day: '2-digit',
@@ -30,9 +23,9 @@ const formatDate = (date) => {
 </script>
 
 <template>
-  <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
+  <div class="flow-root rounded-lg border border-gray-100 shadow-sm">
     <dl class="divide-gray-100 text-sm">
-      <div v-for="item in data" :key="item.id">
+      <div v-for="item in data" :key="item.id" class="border-b p-3">
         <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dd class="font-medium text-gray-900">ID Pesanan : {{ item.id }}</dd>
           <dd class="font-medium text-gray-900">Atas nama : {{ item.user.name }}</dd>
@@ -40,13 +33,11 @@ const formatDate = (date) => {
           <dd class="font-medium text-gray-900">Tanggal di pesan : {{ formatDate(item.user.created_at) }}</dd>
           <dd class="font-medium text-gray-900">Status Pesanan : {{ item.order_status }}</dd>
 
-          <!-- Menampilkan dropdown jika role adalah admin -->
           <dropdown v-if="userRole === 'admin'" class="absolute" :data="item" />
         </div>
         
         <dd class="font-bold text-lg p-3">Total bayar : Rp {{ item.total_harga }},-</dd>
 
-        <!-- Jika role adalah user, tampilkan tombol-tombol berikut -->
         <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-2" v-if="userRole === 'user'">
           <div class="flex gap-2">
             <Link>
@@ -102,8 +93,8 @@ export default {
         const response = await this.$inertia.post(route('user.pesanan.batalkan', { id: item.id }));
 
         await Swal.fire({
-          title: 'Dihapus!',
-          text: `Pesanan berhasil dihapus.`,
+          title: 'Dibatalkan!',
+          text: `Pesanan berhasil dibatalkan.`,
           icon: 'success',
         });
 
@@ -120,7 +111,7 @@ export default {
     },
 
     async onFinish() {
-      // Placeholder untuk logika selesai jika diperlukan
+      
     }
   }
 }

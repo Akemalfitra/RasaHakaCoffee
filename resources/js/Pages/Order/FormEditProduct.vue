@@ -90,6 +90,7 @@
 
 <script>
 import { useForm } from '@inertiajs/vue3';
+import Swal from 'sweetalert2'; 
 
 export default {
     props: {
@@ -116,9 +117,14 @@ export default {
         const submitForm = () => {
             // Send the form data, including the ID, when posting to the update route
             form.post(route('admin.edit.menu', form.id), {
-                onFinish: () => {
-                    // Optionally, close the form or show a success message
-                    console.log('Form submitted successfully');
+              onFinish: () => {
+                  Swal.fire({
+                  icon: 'success',
+                  title: 'Diubah !',
+                  text: 'Menu berhasil di ubah !.',
+                  showConfirmButton: true,
+                });
+                form.reset(); 
                 },
             });
         };

@@ -34,6 +34,7 @@
 
 <script>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import Swal from 'sweetalert2'; 
 
 export default {
   components: {
@@ -47,7 +48,18 @@ export default {
   methods: {
     // Emit event ketika produk ditambahkan ke keranjang
     addToCart() {
-      this.$emit('add-to-cart', this.data); // Kirim data produk ke parent
+
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: 'Ditambakan ke keranjang!',
+        text: `${this.data.nama} telah ditambahkan ke keranjang.`,
+        showConfirmButton: false,
+        timer: 700
+      });
+
+      // Emit data produk ke parent untuk ditambahkan ke keranjang
+      this.$emit('add-to-cart', this.data);
     }
   }
 };

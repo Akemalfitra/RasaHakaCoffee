@@ -68,6 +68,7 @@ import { Head } from '@inertiajs/vue3';
 import Menu from './Order/Menu.vue';
 import Cart from './Order/Cart.vue';
 import { useForm } from '@inertiajs/vue3';
+import Swal from 'sweetalert2'; 
 
 export default {
   props: {
@@ -83,15 +84,13 @@ export default {
       isCartVisible: false,
     };
   },
-  methods: {
+    methods: {
     addToCart(product) {
       const existingProductIndex = this.cart.findIndex(item => item.id === product.id);
 
       if (existingProductIndex !== -1) {
-        
         this.cart[existingProductIndex].quantity += 1;
       } else {
-        
         this.cart.push({ ...product, quantity: 1 });
       }
 
@@ -119,33 +118,58 @@ export default {
     closeCart() {
       this.isCartVisible = false;
     },
-    checkout() {
 
+    // Method untuk checkout
+    checkout() {
+      // Hitung total harga
       const totalPrice = this.cart.reduce((total, item) => total + (item.harga * item.quantity), 0);
 
+      // Persiapkan data cart untuk dikirim ke backend
       const cartData = this.cart.map(item => ({
         productId: item.id,
         harga: item.harga,
         quantity: item.quantity,
       }));
 
-      const form = useForm({
-        userId: this.$page.props.auth.user.id,
-        cart: cartData,  
-        jumlah: totalPrice
-      });
+      // Tampilkan SweetAlert2 untuk konfirmasi
+      Swal.fire({
+        title: 'Konfirmasi Pesanan',
+        text: `Apakah Anda yakin ingin melanjutkan checkout? Total Harga: Rp ${totalPrice}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, lanjutkan',
+        cancelButtonText: 'Batal',
+      }).then((result) => {
+        if (result.isConfirmed) {
 
-      form.post(route('checkout'), {
-        onFinish: () => {
-          this.clear(); 
-        },
+          const form = useForm({
+            userId: this.$page.props.auth.user.id,
+            cart: cartData,
+            jumlah: totalPrice,
+          });
+
+          form.post(route('checkout'), {
+            onFinish: () => {
+
+              Swal.fire({
+                title: 'Pesanan Berhasil!',
+                text: 'Pesanan Anda telah berhasil dibuat dan segera di proses.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+              });
+
+              this.clear();  
+            },
+          });
+        }
       });
     },
+
+    // Reset keranjang
     clear() {
-        
-        localStorage.removeItem('cart'); 
-        this.cart.length = 0;
-        this.isCartVisible = false;
+      localStorage.removeItem('cart'); 
+      this.cart.length = 0;
+      this.isCartVisible = false;
     }
   },
 };

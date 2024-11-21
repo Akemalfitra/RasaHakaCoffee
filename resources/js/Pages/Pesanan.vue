@@ -6,7 +6,6 @@ import { defineComponent } from 'vue';
 
 defineProps({
     pesanan: Object,
-    route: Array
 })
 
 defineComponent({
@@ -41,7 +40,7 @@ defineComponent({
                             >anda belum memesan apapun.
                             </p>
                             <li v-for="item in pesanan" :key="pesanan.id">
-                                <Orders :data="item" :rute="route"/>      
+                                <Orders :data="item"/>      
                             </li>
                         </ul>
                     </div>
