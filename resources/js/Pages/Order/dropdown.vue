@@ -11,67 +11,49 @@
     </div>
 
     <!-- menu dropdown -->
-    <div v-bind:hidden="!showElement" class="absolute z-10 mt-2  rounded-md border border-gray-100 bg-white shadow-lg" role="menu">
+    <div v-bind:hidden="!showElement" class="absolute z-10 mt-2 rounded-md border border-gray-100 bg-white shadow-lg" role="menu">
       <div class="p-2">
-        <Link
-          :href="route('admin.pesanan.batalkan')"
-          as="button"
-          method="post"
+        <button
+          @click="confirmAction('Batalkan Pesanan', 'admin/pesanan/batalkan')"
           :disabled="['Dibatalkan pembeli', 'Dibatalkan penjual', 'Pesanan diproses', 'Pesanan selesai'].includes(data.order_status)"
           :class="['Dibatalkan pembeli', 'Dibatalkan penjual', 'Pesanan diproses', 'Pesanan selesai'].includes(data.order_status) ? 'cursor-not-allowed opacity-50' : ''"
-          @click.prevent="confirmAction('Batalkan Pesanan', route('admin.pesanan.batalkan'), 'post')"
           class="block w-full text-start rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           role="menuitem"
         >
           Batalkan Pesanan
-        </Link>
+        </button>
 
-        <Link
-          :href="route('rincian.admin')"
-          :data="{id : data.id}"
-          as="button"
-          method="get"
+        <button
+          @click="navigateTo('rincian.admin')"
           class="block w-full text-start rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           role="menuitem"
         >
           Rincian Pesanan
-        </Link>
+        </button>
 
-        <Link
-          :href="route('admin.pesanan.proses')"
-          :data="{id : data.id}"
-          as="button"
-          method="post"
+        <button
+          @click="confirmAction('Proses Pesanan', 'admin/pesanan/proses')"
           :disabled="['Dibatalkan pembeli', 'Dibatalkan penjual', 'Pesanan diproses', 'Pesanan selesai'].includes(data.order_status)"
           :class="['Dibatalkan pembeli', 'Dibatalkan penjual', 'Pesanan diproses', 'Pesanan selesai'].includes(data.order_status) ? 'cursor-not-allowed opacity-50' : ''"
-          @click.prevent="confirmAction('Proses Pesanan', route('admin.pesanan.proses'), 'post')"
           class="block w-full text-start rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           role="menuitem"
         >
           Proses Pesanan
-        </Link>
+        </button>
 
-        <Link
-          :href="route('admin.pesanan.selesai')"
-          :data="{id : data.id}"
-          as="button"
-          method="post"
+        <button
+          @click="confirmAction('Pesanan Selesai', 'admin/pesanan/selesai')"
           :disabled="data.order_status !== 'Pesanan diproses'"
           :class="data.order_status !== 'Pesanan diproses' ? 'cursor-not-allowed opacity-50' : ''"
-          @click.prevent="confirmAction('Pesanan Selesai', route('admin.pesanan.selesai'), 'post')"
           class="block w-full text-start rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           role="menuitem"
         >
           Pesanan Selesai
-        </Link>
+        </button>
 
-        <Link
-          v-if="data.order_status === 'Pesanan selesai' || data.order_status === 'Dibatalkan pembeli' || data.order_status === 'Pesanan penjual'"
-          :href="route('admin.pesanan.hapus')"
-          :data="{id : data.id}"
-          as="button"
-          method="post"
-          @click.prevent="confirmAction('Hapus Pesanan', route('admin.pesanan.hapus'), 'post')"
+        <button
+          v-if="data.order_status === 'Pesanan selesai' || data.order_status === 'Dibatalkan pembeli' || data.order_status === 'Dibatalkan penjual'"
+          @click="confirmAction('Hapus Pesanan', 'admin/pesanan/hapus')"
           class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
           role="menuitem"
         >
@@ -79,7 +61,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
           </svg>
           Hapus Pesanan
-        </Link>
+        </button>
       </div>
     </div>
   </div>
@@ -88,7 +70,6 @@
 <script>
 import { Link } from "@inertiajs/vue3";
 import Swal from 'sweetalert2';
-import { Inertia } from '@inertiajs/inertia';
 
 export default {
   data() {
@@ -100,19 +81,21 @@ export default {
     toggleElement() {
       this.showElement = !this.showElement;
     },
-    confirmAction(actionText, route, method) {
+    confirmAction(actionText, route) {
       Swal.fire({
         title: `Apakah Anda yakin ingin ${actionText}?`,
-        icon: 'question',
+        icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Ya, lanjutkan',
         cancelButtonText: 'Batal',
       }).then((result) => {
         if (result.isConfirmed) {
-
-          Inertia[method](route, { _method: method });
+          this.$inertia.post(route, { id: this.data.id }); // Mengirim request dengan data.id menggunakan Inertia.js
         }
       });
+    },
+    navigateTo(routeName) {
+      this.$inertia.visit(this.route(routeName, { id: this.data.id })); // Navigasi ke halaman rincian menggunakan Inertia.js
     }
   },
   props: {

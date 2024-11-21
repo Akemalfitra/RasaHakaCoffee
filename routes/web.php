@@ -19,9 +19,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/pesanan/rincian', [AdminController::class, 'rincianPesanan'])->name('rincian.admin');
-    Route::get('/admin/products', [AdminController::class, 'getProducts'])->name('admin.products');
+    Route::get('admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('admin/pesanan/rincian', [AdminController::class, 'rincianPesanan'])->name('rincian.admin');
+    Route::get('admin/products', [AdminController::class, 'getProducts'])->name('admin.products');
     Route::post('admin/pesanan/batalkan', [AdminController::class, 'batalkanPesanan'])->name('admin.pesanan.batalkan');
     Route::post('admin/pesanan/proses', [AdminController::class, 'prosesPesanan'])->name('admin.pesanan.proses');
     Route::post('admin/pesanan/selesai', [AdminController::class, 'selesaiPesanan'])->name('admin.pesanan.selesai');
@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/pesanan/hapus', [AdminController::class, 'hapusPesanan'])->name('admin.pesanan.hapus');
     Route::get('admin/manu/tambah', [AdminController::class, 'viewTambahMenu'])->name('admin.viewTambah.products');
     Route::post('admin/manu/tambahMenu', [AdminController::class, 'tambahMenu'])->name('admin.tambah.products');
-    Route::get('/admin/profile', [ProfileController::class, 'editAdmin'])->name('profile.edit.admin');    
+    Route::get('admin/profile', [ProfileController::class, 'editAdmin'])->name('profile.edit.admin');    
 });
 
 

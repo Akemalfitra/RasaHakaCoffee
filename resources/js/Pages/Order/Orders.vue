@@ -23,20 +23,20 @@ const formatDate = (date) => {
 </script>
 
 <template>
-  <div class="flow-root rounded-lg border border-gray-100 shadow-sm">
+  <div class="flow-root rounded-lg border border-gray-100 shadow-sm mb-36">
     <dl class="divide-gray-100 text-sm">
       <div v-for="item in data" :key="item.id" class="border-b p-3">
+
         <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dd class="font-medium text-gray-900">ID Pesanan : {{ item.id }}</dd>
           <dd class="font-medium text-gray-900">Atas nama : {{ item.user.name }}</dd>
           <dd class="font-medium text-gray-900">Email pemesan : {{ item.user.email }}</dd>
           <dd class="font-medium text-gray-900">Tanggal di pesan : {{ formatDate(item.user.created_at) }}</dd>
           <dd class="font-medium text-gray-900">Status Pesanan : {{ item.order_status }}</dd>
-
           <dropdown v-if="userRole === 'admin'" class="absolute" :data="item" />
         </div>
         
-        <dd class="font-bold text-lg p-3">Total bayar : Rp {{ item.total_harga }},-</dd>
+        <dd class="font-bold text-lg p-3 pb-10">Total bayar : Rp {{ item.total_harga }},-</dd>
 
         <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-2" v-if="userRole === 'user'">
           <div class="flex gap-2">
