@@ -53,7 +53,6 @@ export default {
     PrimaryButton
   },
   props: {
-    // Terima cart dan visibilitas modal dari parent
     cart: {
       type: Array,
       required: true,
@@ -64,22 +63,20 @@ export default {
     },
   },
   computed: {
-    // Menghitung total harga
     totalPrice() {
       return this.cart.reduce((total, item) => total + (item.harga * item.quantity), 0);
     }
   },
     methods: {
-    // Menghapus item dari cart berdasarkan index
-    removeFromCart(index) {
-      this.$emit('remove-item', index); // Emit event ke parent untuk menghapus item
+      removeFromCart(index) {
+        this.$emit('remove-item', index); 
     },
-    // Menutup modal
+  
     closeCart() {
-      this.$emit('close-cart');  // Emit event untuk menutup modal
+      this.$emit('close-cart');
       },
       checkout() {
-      this.$emit('checkout', this.totalPrice); // Emit event untuk melakukan checkout
+      this.$emit('checkout', this.totalPrice); 
       },
       clear() {
         this.$emit('clear')
