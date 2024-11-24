@@ -32,9 +32,12 @@ import { Head } from '@inertiajs/vue3';
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
-                    <div class="p-6 text-gray-900 mb-24">
+                    <div 
+                    class="p-6 text-gray-900"
+                    :class="pesanan.length !== 0 ? 'mb-24' : ''"
+                    >
                         <ul>
-                            <p v-if="pesanan.length === 0" class="text-gray-500">Belum ada pesanan dari pelanggan.</p>
+                            <p v-if="pesanan.length === 0" class="text-gray-500drop">Belum ada pesanan dari pelanggan.</p>
                             <li v-if="pesanan.length != 0">
                                 <Orders :data="pesanan"/>      
                             </li>

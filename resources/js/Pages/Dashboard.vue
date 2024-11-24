@@ -158,6 +158,7 @@ export default {
               });
 
               this.clear();  
+              this.isCartVisible = false;
             },
           });
         }
@@ -168,7 +169,6 @@ export default {
     clear() {
       localStorage.removeItem('cart'); 
       this.cart.length = 0;
-      this.isCartVisible = false;
     }
   },
 };

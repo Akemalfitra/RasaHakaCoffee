@@ -122,7 +122,7 @@ class AdminController extends Controller
 
         if ($produk) {
             
-            if ($produk->gambar && Storage::exists('storage/img/products/' . $produk->gambar)) {
+            if ($produk->gambar && Storage::exists('/img/products/' . $produk->gambar)) {
                 Storage::delete('/img/products/' . $produk->gambar); 
             }
 
@@ -159,28 +159,17 @@ class AdminController extends Controller
         $product->nama = $validated['name'];
         $product->jenis = $validated['jenis'];
         $product->harga = $validated['harga'];
-    
+
         if ($request->hasFile('foto')) {
-    
+
+            if ($product->gambar) {
+                Storage::delete('/img/products/' . $product->gambar);
+            }
+
             $extension = $request->foto->getClientOriginalExtension();
-
             $fileName = md5(time()) . '.' . $extension;
-
-            $folder = '/img/products';
-
-            if (!Storage::exists($folder)) {
-
-                Storage::makeDirectory($folder);
-
-            }
-
+            $folder = '/img/products/';
             $request->foto->storeAs($folder, $fileName);
-
-            if ($product->foto && Storage::exists($product->foto)) {
-
-                Storage::delete($product->foto);
-                
-            }
 
             $product->gambar = $fileName;
         }
