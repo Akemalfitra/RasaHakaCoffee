@@ -2,7 +2,7 @@
   <div class="block rounded-lg p-4 shadow-sm shadow-indigo-100">
     <img
       alt="Gambar"
-      :src="'/img/products/' + data.gambar"
+      :src="'storage/img/products/' + data.gambar"
       class="h-56 w-full rounded-md object-cover"
     />
   
@@ -46,7 +46,6 @@ export default {
     }
   },
   methods: {
-    // Emit event ketika produk ditambahkan ke keranjang
     addToCart() {
 
       Swal.fire({
@@ -58,7 +57,6 @@ export default {
         timer: 700
       });
 
-      // Emit data produk ke parent untuk ditambahkan ke keranjang
       this.$emit('add-to-cart', this.data);
     }
   }

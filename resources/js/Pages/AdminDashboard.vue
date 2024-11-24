@@ -8,12 +8,12 @@ import { Head } from '@inertiajs/vue3';
     <Head title="Pesanan pelanggan" />
 
     <AuthenticatedLayout>
-            <template #header>
-                <div>
-                    <a href="#" class="text-2xl font-bold text-yellow-600"> Admin RM Simangat </a>
-                    <address class="mt-2 not-italic">Lhokseumawe, Hagu Barat Laut.</address>
-                </div>
-            </template>
+        <template #header>
+            <div>
+                <a href="#" class="text-2xl font-bold text-yellow-600"> Admin RM Simangat </a>
+                <address class="mt-2 not-italic">Lhokseumawe, Hagu Barat Laut.</address>
+            </div>
+        </template>
 
         <div class="relative w-full sm:h-64 h-36 overflow-hidden">
             <img src="img/background.jpg" alt="" class="w-full sm:h-auto h-64 overflow-hidden">
@@ -32,7 +32,7 @@ import { Head } from '@inertiajs/vue3';
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
-                    <div class="p-6 text-gray-900">
+                    <div class="p-6 text-gray-900 mb-24">
                         <ul>
                             <p v-if="pesanan.length === 0" class="text-gray-500">Belum ada pesanan dari pelanggan.</p>
                             <li v-if="pesanan.length != 0">
@@ -43,6 +43,7 @@ import { Head } from '@inertiajs/vue3';
                 </div>
             </div>
         </div>
+        
     </AuthenticatedLayout>
 </template>
 

@@ -23,7 +23,7 @@ const formatDate = (date) => {
 </script>
 
 <template>
-  <div class="flow-root rounded-lg border border-gray-100 shadow-sm mb-36">
+  <div class="flow-root rounded-lg border border-gray-100 shadow-sm">
     <dl class="divide-gray-100 text-sm">
       <div v-for="item in data" :key="item.id" class="border-b p-3">
 

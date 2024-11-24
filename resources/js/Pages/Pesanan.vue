@@ -40,7 +40,7 @@ defineComponent({
                             >anda belum memesan apapun.
                             </p>
                             <li v-for="item in pesanan" :key="pesanan.id">
-                                <Orders :data="item"/>      
+                                <Orders :data="item"/>
                             </li>
                         </ul>
                     </div>

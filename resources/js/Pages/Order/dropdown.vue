@@ -90,12 +90,28 @@ export default {
         cancelButtonText: 'Batal',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$inertia.post(route, { id: this.data.id }); // Mengirim request dengan data.id menggunakan Inertia.js
+          this.$inertia.post(route, { id: this.data.id }).then(() => {
+            
+            Swal.fire({
+              title: 'Berhasil!',
+              text: `${actionText} telah berhasil dilakukan.`,
+              icon: 'success',
+              confirmButtonText: 'Tutup'
+            });
+          }).catch(() => {
+            
+            Swal.fire({
+              title: 'Gagal!',
+              text: 'Terjadi kesalahan. Silakan coba lagi.',
+              icon: 'error',
+              confirmButtonText: 'Tutup'
+            });
+          });
         }
       });
     },
     navigateTo(routeName) {
-      this.$inertia.visit(this.route(routeName, { id: this.data.id })); // Navigasi ke halaman rincian menggunakan Inertia.js
+      this.$inertia.visit(this.route(routeName, { id: this.data.id })); 
     }
   },
   props: {
@@ -106,3 +122,4 @@ export default {
   }
 };
 </script>
+

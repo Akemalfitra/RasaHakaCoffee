@@ -6,13 +6,12 @@
       class="h-56 w-full rounded-md object-cover"
     />
   
-    <div class="mt-2">
 
       <div>
-        <h2 class="text-xl text-gray-500">{{ data.nama }}</h2>
+        <h2 class="text-xl text-gray-500 py-1">{{ data.nama }}</h2>
       </div>
 
-      <div class="py-3">
+      <div class="py-2">
         <dl class="flex gap-10">
           <div>
             <dt>Harga</dt>
@@ -25,7 +24,7 @@
         </dl>
       </div>
   
-      <div class="mt-6 flex items-center gap-3 text-xs">
+      <div class="mt-3 flex items-center gap-3 text-xs">
         <div class="flex gap-2 sm:shrink-0 sm:items-center sm:gap-2">
            <Link
             :href="route('admin.menu.edit')"
@@ -45,7 +44,7 @@
       </div>
     </div>  
   </div>
-</div>
+
 </template>
 
 <script>

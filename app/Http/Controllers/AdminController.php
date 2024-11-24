@@ -55,7 +55,6 @@ class AdminController extends Controller
             
             $pesanan->save();
 
-
             return redirect()->route('admin.dashboard')->with('success', 'Pesanan berhasil dibatalkan');
 
         } catch (\Exception $e) {
@@ -123,7 +122,7 @@ class AdminController extends Controller
 
         if ($produk) {
             
-            if ($produk->gambar && Storage::exists('/img/products/' . $produk->gambar)) {
+            if ($produk->gambar && Storage::exists('storage/img/products/' . $produk->gambar)) {
                 Storage::delete('/img/products/' . $produk->gambar); 
             }
 
@@ -132,7 +131,7 @@ class AdminController extends Controller
             return redirect()->route('admin.products');
         }
 
-           return redirect()->route('admin.products')->with('error', 'Menu gagal di hapus !');
+        return redirect()->route('admin.products')->with('error', 'Menu gagal di hapus !');
     }
 
     public function viewEditMenu(Request $request) {
@@ -172,7 +171,7 @@ class AdminController extends Controller
             $fileName = md5(time()) . '.' . $extension;
 
             // Define the folder to store the image
-            $folder = 'img/products';
+            $folder = '/img/products';
 
             // Ensure the directory exists
             if (!Storage::exists($folder)) {

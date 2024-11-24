@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     public function store(Request $request) {
+
+        dd($request);
         $order = Orders::create([
             'user_id' => $request->input('userId'),
             'order_status' => 'pending',

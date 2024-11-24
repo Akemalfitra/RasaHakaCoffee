@@ -25,10 +25,10 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestLayout class="p-20">
         <Head title="Register" />
-
         <h1 class="text-lg text-center py-3">Form register admin</h1>
+
 
         <form @submit.prevent="submit">
             <div>
