@@ -53,7 +53,7 @@
 
             <div>
               <label class="sr-only" for="foto">Foto</label>
-              <p class="py-3">Update foto menu <span class="text-gray-400">(kosongkan bila tidak ada perubahan).</span></p>
+              <p class="py-3">Update foto menu <span class="text-gray-400">(biarkan bila tidak ada perubahan).</span></p>
               
               <div>
                 <img :src="'/img/products/' + form.foto" alt="" width="200px" style="border-radius: 10px; margin: auto;">  

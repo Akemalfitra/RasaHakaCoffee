@@ -21,7 +21,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestLayout class="p-20">
         <Head title="Register" />
 
         <form @submit.prevent="submit">

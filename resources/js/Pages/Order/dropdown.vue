@@ -24,7 +24,7 @@
         </button>
 
         <button
-          @click="navigateTo('rincian.admin'); !toggleElement"
+          @click="navigateTo('rincian.admin'); toggleElement()"
           class="block w-full text-start rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           role="menuitem"
         >
@@ -32,7 +32,7 @@
         </button>
 
         <button
-          @click="confirmAction('Proses Pesanan', 'admin/pesanan/proses'); !toggleElement"
+          @click="confirmAction('Proses Pesanan', 'admin/pesanan/proses'); toggleElement()"
           :disabled="['Dibatalkan pembeli', 'Dibatalkan penjual', 'Pesanan diproses', 'Pesanan selesai'].includes(data.order_status)"
           :class="['Dibatalkan pembeli', 'Dibatalkan penjual', 'Pesanan diproses', 'Pesanan selesai'].includes(data.order_status) ? 'cursor-not-allowed opacity-50' : ''"
           class="block w-full text-start rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
@@ -42,7 +42,7 @@
         </button>
 
         <button
-          @click="confirmAction('Pesanan Selesai', 'admin/pesanan/selesai'); !toggleElement"
+          @click="confirmAction('Pesanan Selesai', 'admin/pesanan/selesai'); toggleElement()"
           :disabled="data.order_status !== 'Pesanan diproses'"
           :class="data.order_status !== 'Pesanan diproses' ? 'cursor-not-allowed opacity-50' : ''"
           class="block w-full text-start rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
@@ -53,7 +53,7 @@
 
         <button
           v-if="data.order_status === 'Pesanan selesai' || data.order_status === 'Dibatalkan pembeli' || data.order_status === 'Dibatalkan penjual'"
-          @click="confirmAction('Hapus Pesanan', 'admin/pesanan/hapus'); !toggleElement"
+          @click="confirmAction('Hapus Pesanan', 'admin/pesanan/hapus'); toggleElement()"
           class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
           role="menuitem"
         >

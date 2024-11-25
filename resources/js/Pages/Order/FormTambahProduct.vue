@@ -104,7 +104,7 @@ const submit = () => {
   
             <div>
               <label class="sr-only" for="gambar">Foto</label>
-              <p class="py-3">Upload foto menu <span class="text-gray-400">(maksimal 2mb).</span></p>
+              <p class="py-3">Upload foto menu <span class="text-gray-400">(Max. 2 MB).</span></p>
               <input
                 required
                 @change="handleFileChange"

@@ -69,7 +69,7 @@ defineComponent({
                     </h2>
 
                     <p class="mt-1 text-sm text-gray-600 py-3">
-                        Tambahkan akun admin untuk mempermudah pengelolaan pesanan pelanggan.
+                        Tambahkan akun admin untuk mempermudah pengelolaan menu dan pesanan pelanggan.
                     </p>
                     <Link
                     :href="route('admin.register')"
