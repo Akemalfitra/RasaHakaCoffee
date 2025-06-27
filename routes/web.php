@@ -26,6 +26,7 @@ Route::middleware([admin::class])->group(function () {
 
 Route::middleware([user::class])->group(function () {
     Route::get('/', [MenuController::class, 'redirect']);
+    Route::get('/user-dashboard', [MenuController::class, 'UserDashboard'])->name('user-dashboard');
     Route::get('/user-menu', [MenuController::class, 'getMenu'])->name('dashboard');
     Route::get('/user-pesanan', [OrderController::class, 'getPesanan'])->name('pesanan');
     Route::get('/user-profile', [ProfileController::class, 'edit'])->name('profile.edit');

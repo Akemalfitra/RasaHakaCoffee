@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
+    
     Public function getMenu() {
     // Ambil data produk dari database
         $products = Product::all();
@@ -18,6 +19,11 @@ class MenuController extends Controller
         ]);
     }
 
+    Public function UserDashboard() {
+
+        return Inertia::render('UserDashboard');
+    }
+    
     public function redirect() {
         return redirect("menu");
     }

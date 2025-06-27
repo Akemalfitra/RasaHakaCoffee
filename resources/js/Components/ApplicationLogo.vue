@@ -5,5 +5,5 @@
         />
     </svg> -->
 
-    <img class="rounded-full" src="/img/logo.webp" alt="Logo" width="300px"/>
+    <img class="rounded-full" src="/img/logo.png" alt="Logo" width="300px"/>
 </template>

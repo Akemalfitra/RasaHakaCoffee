@@ -28,11 +28,21 @@ const showingNavigationDropdown = ref(false);
                                     />
                                 </Link>
                                 <Link :href="route('dashboard')" class="ml-3">
-                                    RM Simangat
+                                    RasaHaKa
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
+                             <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                            >
+                                <NavLink
+                                    :href="route('user-dashboard')"
+                                    :active="route().current('user-dashboard')"
+                                >
+                                    Dashboard
+                                </NavLink>
+                            </div>
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
@@ -53,6 +63,9 @@ const showingNavigationDropdown = ref(false);
                                     Pesanan anda
                                 </NavLink>
                             </div>
+                            
+
+
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">

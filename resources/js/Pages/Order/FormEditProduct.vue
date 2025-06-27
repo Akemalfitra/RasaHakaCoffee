@@ -8,9 +8,9 @@
           </p>
 
           <div class="mt-8">
-            <a href="#" class="text-2xl font-bold text-yellow-600"> RM Simangat </a>
+            <a href="#" class="text-2xl font-bold text-yellow-600"> RasaHaka </a>
 
-            <address class="mt-2 not-italic text-gray-500">Lhokseumawe, Hagu Barat Laut.</address>
+            <address class="mt-2 not-italic text-gray-500">Takengon Aceh Indonesia.</address>
           </div>
         </div>
 

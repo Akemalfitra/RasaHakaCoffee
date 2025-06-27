@@ -1,4 +1,4 @@
-<script setup>
+    <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayoutAdmin.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
@@ -27,7 +27,7 @@ defineComponent({
 <template>
     <Head title="Profile Admin" />
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout>   
         <template #header>
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"

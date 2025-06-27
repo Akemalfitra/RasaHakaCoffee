@@ -15,8 +15,12 @@ class Orders extends Model
     // Atribut yang dapat diisi (Mass Assignment)
     protected $fillable = [
         'user_id',
+        'total_price',
         'order_status',
-        'total_harga',
+        'payment_type',
+        'payment_token',
+        'snap_url',
+        'refund_status',
     ];
 
     // Relasi: Order ini dimiliki oleh seorang User

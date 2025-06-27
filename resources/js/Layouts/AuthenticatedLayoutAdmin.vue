@@ -28,7 +28,7 @@ const showingNavigationDropdown = ref(false);
                                     />
                                 </Link>
                                 <Link :href="route('admin.dashboard')" class="ml-3">
-                                    RM Simangat
+                                    RasaHaKa
                                 </Link>
                             </div>
 

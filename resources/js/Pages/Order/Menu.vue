@@ -15,7 +15,7 @@
         <dl class="flex gap-10">
           <div>
             <dt>Harga</dt>
-            <dd class="text-sm text-gray-500">Rp {{ data.harga }}/porsi</dd>
+            <dd class="text-sm text-gray-500">Rp {{ data.harga }}/cup</dd>
           </div>
           <div>
             <dt>Jenis</dt>

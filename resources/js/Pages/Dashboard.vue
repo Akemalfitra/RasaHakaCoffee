@@ -1,31 +1,49 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-
+import { Head, Link } from '@inertiajs/vue3'; // Menambahkan Link untuk tombol
+// Bagian script setup ini dibiarkan untuk konsistensi, tidak ada logika baru yang ditambahkan di sini.
 </script>
 
 <template>
-  <Head title="Daftar menu" />
+  <Head title="Daftar Menu - RasaHaka" />
 
   <AuthenticatedLayout>
     <template #header>
-          <div>
-            <a href="#" class="text-2xl font-bold text-yellow-600"> RM Simangat </a>
-            <address class="mt-2 not-italic">Lhokseumawe, Hagu Barat Laut.</address>
-          </div>
+        <div>
+            <a href="#" class="text-2xl font-bold text-yellow-600"> Rasahaka </a>
+            <address class="mt-2 not-italic">Takengon, Aceh Indonesia.</address>
+        </div>
     </template>
 
-    <div class="relative w-full sm:h-64 h-36 overflow-hidden">
-      <img src="img/background.jpg" alt="" class="w-full sm:h-auto h-64 overflow-hidden">
-      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 class="text-xl font-semibold leading-tight text-white">
-          RM Simangat
-        </h1>
-        <h2 class="sm:text-xl text-sm font-semibold leading-tight text-white">
-          Nikmati Hidangan Spesial Kami, Rasakan Kelezatan Disetiap Gigitannya Simangat Bertoh-Mangat.
-        </h2>
-      </div>
-    </div>
+    <section
+        class="relative flex h-[60vh] w-full items-center justify-center overflow-hidden bg-stone-900"
+        aria-label="Selamat datang di RasaHaka"
+    >
+        <div class="absolute inset-0 z-10 bg-gradient-to-b from-stone-900/50 to-stone-900/80"></div>
+        
+        <img
+            src="/img/rasahaka-up.jpg"
+            alt="Suasana RasaHaka"
+            class="absolute inset-0 h-full w-full object-cover opacity-70"
+            aria-hidden="true"
+        />
+        
+        <div class="relative z-20 px-4 text-center sm:px-6">
+            <h1 class="mb-4 font-serif text-4xl font-extrabold text-white drop-shadow-xl sm:text-6xl md:text-7xl animate-fade-in">
+                RasaHaka
+            </h1>
+            <p class="mb-8 font-sans text-lg font-semibold text-yellow-100 drop-shadow-lg sm:text-2xl">
+            Nikmati Kopi dengan Cita Rasa Unik dari Tanah Aceh
+            </p>
+            <a
+                href="#menu-list"
+                class="inline-block rounded-lg bg-yellow-600 px-8 py-3 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-yellow-700 animate-pulse-slow"
+                aria-label="Lihat daftar menu"
+            >
+                Lihat Menu
+            </a>
+        </div>
+    </section>
 
     <Cart 
       :cart="cart" 
@@ -36,23 +54,22 @@ import { Head } from '@inertiajs/vue3';
       @clear="clear" 
     />
 
-    <div class="py-12">
+    <div id="menu-list" class="py-12 bg-stone-100">
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-      <!-- Tombol untuk membuka modal -->
-       <div class="pb-5">
-         <a href="#" @click="openCart" 
-         class="flex hover:text-green-700 justify-end transition duration-200 " > 
-          Konfirmasi pesanan anda disini ({{ cart.length }})
-             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-               <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
-             </svg>
-         </a>
-       </div>
+        <div class="pb-5 pr-4 md:pr-0">
+            <a href="#" @click.prevent="openCart" 
+              class="flex items-center justify-end text-lg font-semibold text-gray-700 transition duration-200 hover:text-green-700" > 
+              Keranjang Anda ({{ cart.length }})
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bag-check-fill ms-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0m-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
+                </svg>
+            </a>
+        </div>
 
-        <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg flex">
-          <div class="p-6 text-gray-900">
-            <ul class="grid sm:grid-cols-2 gap-6 grid-cols-1 md:grid-cols-3">
+        <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+          <div class="p-6 text-gray-900 md:p-8">
+            <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               <li v-for="product in products" :key="product.id">
                 <Menu :data="product" @add-to-cart="addToCart" />
               </li>
@@ -65,6 +82,7 @@ import { Head } from '@inertiajs/vue3';
 </template>
 
 <script>
+// Tidak ada perubahan yang diperlukan pada logika komponen. Semuanya sudah bekerja dengan baik.
 import Menu from './Order/Menu.vue';
 import Cart from './Order/Cart.vue';
 import { useForm } from '@inertiajs/vue3';
@@ -123,20 +141,20 @@ export default {
       
       const totalPrice = this.cart.reduce((total, item) => total + (item.harga * item.quantity), 0);
 
-      // Persiapkan data cart untuk dikirim ke backend
       const cartData = this.cart.map(item => ({
         productId: item.id,
         harga: item.harga,
         quantity: item.quantity,
       }));
 
-      // Tampilkan SweetAlert2 untuk konfirmasi
       Swal.fire({
         title: 'Konfirmasi Pesanan',
-        text: `Apakah Anda yakin ingin melanjutkan checkout? Total Harga: Rp ${totalPrice}`,
+        text: `Apakah Anda yakin ingin melanjutkan checkout? Total Harga: Rp ${totalPrice.toLocaleString('id-ID')}`,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Ya, lanjutkan',
+        confirmButtonColor: '#16a34a',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Lanjutkan Pesanan!',
         cancelButtonText: 'Batal',
       }).then((result) => {
         if (result.isConfirmed) {
@@ -149,14 +167,12 @@ export default {
 
           form.post(route('checkout'), {
             onFinish: () => {
-
               Swal.fire({
                 title: 'Pesanan Berhasil!',
                 text: 'Pesanan Anda telah berhasil dibuat dan segera di proses.',
                 icon: 'success',
                 confirmButtonText: 'OK',
               });
-
               this.clear();  
               this.isCartVisible = false;
             },
@@ -165,7 +181,6 @@ export default {
       });
     },
 
-    // Reset keranjang
     clear() {
       localStorage.removeItem('cart'); 
       this.cart.length = 0;
@@ -173,3 +188,40 @@ export default {
   },
 };
 </script>
+
+<style>
+/* Menambahkan ini agar scroll ke #menu-list berjalan mulus */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Menambahkan ini untuk animasi dari dashboard RasaHaka */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSlow {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 2.5s infinite ease-in-out;
+}
+</style>

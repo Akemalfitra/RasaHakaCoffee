@@ -7,7 +7,7 @@
       <!-- Daftar Item di Keranjang -->
       <ul class="space-y-4">
         <li v-for="(item, index) in cart" :key="item.id" class="flex justify-between items-center">
-          <span class="py-2">{{ item.nama }} - Rp. {{ item.harga }} - x{{ item.quantity }}</span>
+          <span class="py-2">{{ item.nama }} - Rp. {{ item.harga }} - x{{ item.quantity }}</span> 
           <button 
             @click="removeFromCart(index)" 
             class="text-red-300 hover:text-red-600"
