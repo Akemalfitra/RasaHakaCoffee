@@ -55,6 +55,12 @@ const formatDate = (date) => {
             </Link>
           </div>
         </div>
+
+        <div class="" v-if="userRole === 'owner'">
+            <Link :href="route('rincian.owner')" :data="{ id: item.id }" as="button" method="get">
+              <PrimaryButton>Rincian Pesanan</PrimaryButton>
+            </Link>
+        </div>
       </div>
     </dl>
   </div>

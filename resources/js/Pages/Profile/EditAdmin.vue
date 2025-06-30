@@ -62,6 +62,7 @@ defineComponent({
 
                 <div
                     class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
+                    v-if="$page.props.auth.user.role == 'owner'"
                 >
 
                      <h2 class="text-lg font-medium text-gray-900">

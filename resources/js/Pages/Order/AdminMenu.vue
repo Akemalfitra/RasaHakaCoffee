@@ -24,7 +24,7 @@
         </dl>
       </div>
   
-      <div class="mt-3 flex items-center gap-3 text-xs">
+      <div class="mt-3 flex items-center gap-3 text-xs" v-if="$page.props.auth.user.role == 'admin'">
         <div class="flex gap-2 sm:shrink-0 sm:items-center sm:gap-2">
            <Link
             :href="route('admin.menu.edit')"
@@ -42,6 +42,7 @@
         </PrimaryButton>
 
       </div>
+      
     </div>  
   </div>
 

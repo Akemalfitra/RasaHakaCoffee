@@ -45,8 +45,9 @@
         <PrimaryButton @click="closeCart">Tutup</PrimaryButton>
         <PrimaryButton 
           v-show="cart.length > 0" 
+          :disabled="!atasNama"
           @click="checkout" 
-          class="bg-green-600 hover:bg-green-700">
+          class="bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed">
           Konfirmasi Pesanan
         </PrimaryButton>
       </div>
