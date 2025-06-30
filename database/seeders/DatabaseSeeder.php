@@ -38,6 +38,12 @@ class DatabaseSeeder extends Seeder
                 'email' => 'admin2@gmail.com',
                 'password' => bcrypt('admin2'),
                 'role' => 'admin',
+            ],
+            [
+                'name' => 'owner',
+                'email' => 'owner@gmail.com',
+                'password' => bcrypt('owner'),
+                'role' => 'owner',
             ]
         ];
 

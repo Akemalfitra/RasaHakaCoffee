@@ -2,11 +2,22 @@
 
 use App\Http\Middleware\user;
 use App\Http\Middleware\admin;
+use App\Http\Middleware\owner;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProfileController;
+
+
+Route::middleware([owner::class])->group(function () {
+    Route::get('/owner-pesanan', [OwnerController::class, 'index'])->name('owner.dashboard');
+    Route::get('/owner-menu', [OwnerController::class, 'getProducts'])->name('owner.products');
+    Route::get('/owner-penjualan', [OwnerController::class, 'getPenjualan'])->name('owner.penjualan');
+    Route::get('/owner-pesanan/rincian', [OwnerController::class, 'rincianPesanan'])->name('rincian.owner');
+    Route::get('/owner/profile', [ProfileController::class, 'editOwner'])->name('profile.edit.owner');
+});
 
 Route::middleware([admin::class])->group(function () {
     Route::get('/admin-pesanan', [AdminController::class, 'index'])->name('admin.dashboard');
