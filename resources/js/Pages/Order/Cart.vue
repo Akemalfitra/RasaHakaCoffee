@@ -19,7 +19,23 @@
         </li>
       </ul>
 
-      <!-- Total Harga -->
+      <!-- Atas nama -->
+
+      <div v-show="cart.length > 0" class="mt-4 border-t pt-4 flex flex-col items-center">
+        
+        <label class="block text-gray-700 text-sm font-medium mb-2" for="atasNama">
+          Atas Nama
+        </label>
+        <input
+          id="atasNama"
+          v-model="atasNama"
+          required
+          type="text"
+          placeholder="Masukkan nama pemesan"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200 text-base"
+        />
+      
+      </div>
       <div v-show="cart.length > 0" class="mt-4 border-t pt-4">
         <p class="text-lg font-semibold">Total: Rp. {{ totalPrice }}</p>
       </div>
@@ -62,6 +78,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      atasNama: ''
+    };
+  },
   computed: {
     totalPrice() {
       return this.cart.reduce((total, item) => total + (item.harga * item.quantity), 0);
@@ -76,7 +97,7 @@ export default {
       this.$emit('close-cart');
       },
       checkout() {
-      this.$emit('checkout', this.totalPrice); 
+      this.$emit('checkout', this.totalPrice, this.atasNama); 
       },
       clear() {
         this.$emit('clear')

@@ -121,14 +121,15 @@ class AdminController extends Controller
         $produk = Product::find($request->id);
 
         if ($produk) {
-            
-            if ($produk->gambar && Storage::exists('/img/products/' . $produk->gambar)) {
-                Storage::delete('/img/products/' . $produk->gambar); 
+
+            // Hapus file gambar dari folder public/img/products jika ada
+            if ($produk->gambar && file_exists(public_path('img/products/' . $produk->gambar))) {
+            unlink(public_path('img/products/' . $produk->gambar));
             }
 
             $produk->delete();
 
-            return redirect()->route('admin.products');
+            return redirect()->route('admin.products')->with('success', 'Menu berhasil dihapus!');
         }
 
         return redirect()->route('admin.products')->with('error', 'Menu gagal di hapus !');
@@ -159,17 +160,23 @@ class AdminController extends Controller
         $product->nama = $validated['name'];
         $product->jenis = $validated['jenis'];
         $product->harga = $validated['harga'];
-
         if ($request->hasFile('foto')) {
 
-            if ($product->gambar) {
-                Storage::delete('/img/products/' . $product->gambar);
+            // Hapus gambar lama jika ada
+            if ($product->gambar && file_exists(public_path('img/products/' . $product->gambar))) {
+            unlink(public_path('img/products/' . $product->gambar));
             }
 
             $extension = $request->foto->getClientOriginalExtension();
             $fileName = md5(time()) . '.' . $extension;
-            $folder = '/img/products/';
-            $request->foto->storeAs($folder, $fileName);
+            $folder = public_path('img/products');
+
+            if (!file_exists($folder)) {
+            mkdir($folder, 0777, true);
+            }
+
+            // Simpan file langsung ke folder public/img/products
+            $request->foto->move($folder, $fileName);
 
             $product->gambar = $fileName;
         }
@@ -195,21 +202,15 @@ class AdminController extends Controller
     ]);
 
     if ($request->hasFile('gambar')) {
-        
         $extension = $request->gambar->getClientOriginalExtension();
-        
         $fileName = md5(time()) . '.' . $extension;
+        $folder = public_path('img/products');
 
-        $folder = ('/img/products');
-
-        if (!Storage::exists($folder)) {
-
-            Storage::makeDirectory($folder);
-
+        if (!file_exists($folder)) {
+            mkdir($folder, 0777, true);
         }
-        
-        $request->gambar->storeAs($folder, $fileName);
-        
+
+        $request->gambar->move($folder, $fileName);
     }
 
     Product::create([

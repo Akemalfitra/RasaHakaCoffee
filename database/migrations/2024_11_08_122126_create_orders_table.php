@@ -14,12 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relasi ke user
-            $table->string('total_price')->unique(); // ID unik dari Midtrans
-            $table->string('order_status')->nullable()->default('pending'); // Status order
-            $table->string('payment_type')->nullable();
-            $table->string('payment_token')->nullable();
-            $table->string('snap_url')->nullable();
-            $table->string('refund_status')->nullable();
+            $table->string('order_status')->nulable()->default('pending'); // ID unik dari Midtrans
+            $table->string('nama_pemesan')->nulable(); // ID unik dari Midtrans
             $table->integer('total_harga'); // Total amount order
             $table->timestamps();
         });

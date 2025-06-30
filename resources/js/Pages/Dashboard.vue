@@ -137,8 +137,8 @@ export default {
       this.isCartVisible = false;
     },
 
-    checkout() {
-      
+   checkout(total, atasNama) {
+    
       const totalPrice = this.cart.reduce((total, item) => total + (item.harga * item.quantity), 0);
 
       const cartData = this.cart.map(item => ({
@@ -158,9 +158,9 @@ export default {
         cancelButtonText: 'Batal',
       }).then((result) => {
         if (result.isConfirmed) {
-
           const form = useForm({
             userId: this.$page.props.auth.user.id,
+            atas_nama: atasNama,
             cart: cartData,
             jumlah: totalPrice,
           });
@@ -180,6 +180,7 @@ export default {
         }
       });
     },
+
 
     clear() {
       localStorage.removeItem('cart'); 

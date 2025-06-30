@@ -48,34 +48,40 @@ class DatabaseSeeder extends Seeder
         // Membuat produk
         $products = [
             [
-                'nama' => 'Nasi Goreng',
-                'jenis' => 'Makanan Utama',
-                'harga' => 25000,
-                'gambar' => 'nasi_goreng.jpg',
+                'nama' => 'Spanish Choco',
+                'jenis' => 'non-coffee',
+                'harga' => 18000,
+                'gambar' => 'spanish-choco2.jpg',
             ],
             [
-                'nama' => 'Mie Goreng',
-                'jenis' => 'Makanan Utama',
-                'harga' => 20000,
-                'gambar' => 'mie_goreng.jpg',
+                'nama' => 'Spanish Berry',
+                'jenis' => 'non-coffee',
+                'harga' => 18000,
+                'gambar' => 'spanish-berry2.jpg',
             ],
             [
-                'nama' => 'Sate Ayam',
-                'jenis' => 'Makanan Utama',
-                'harga' => 30000,
-                'gambar' => 'sate_ayam.jpg',
+                'nama' => 'Gayo Reserve Brew',
+                'jenis' => 'coffee',
+                'harga' => 28000,
+                'gambar' => 'gayo-reserve-brew.jpg',
             ],
             [
-                'nama' => 'Es Teh Manis',
-                'jenis' => 'Minuman',
-                'harga' => 5000,
-                'gambar' => 'es_teh_manis.jpg',
+                'nama' => 'Arabian Gold Latte',
+                'jenis' => 'coffee',
+                'harga' => 32000,
+                'gambar' => 'arabian-gold-latte.jpg',
             ],
             [
-                'nama' => 'Es Jeruk',
-                'jenis' => 'Minuman',
-                'harga' => 8000,
-                'gambar' => 'es_jeruk.jpg',
+                'nama' => 'Amber Cinnamon Flat White ',
+                'jenis' => 'coffee',
+                'harga' => 49000,
+                'gambar' => 'amber-cinnamon-flat-white.jpg',
+            ],
+            [
+                'nama' => 'Nitro Cold Brew',
+                'jenis' => 'coffee',
+                'harga' => 59000,
+                'gambar' => 'nitro-cold-brew.jpg',
             ]
         ];
 

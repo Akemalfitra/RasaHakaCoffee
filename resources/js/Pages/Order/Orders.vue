@@ -29,7 +29,7 @@ const formatDate = (date) => {
 
         <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dd class="font-medium text-gray-900">ID Pesanan : {{ item.id }}</dd>
-          <dd class="font-medium text-gray-900">Atas nama : {{ item.user.name }}</dd>
+          <dd class="font-medium text-gray-900">Atas nama : {{ item.nama_pemesan }}</dd>
           <dd class="font-medium text-gray-900">Email pemesan : {{ item.user.email }}</dd>
           <dd class="font-medium text-gray-900">Tanggal di pesan : {{ formatDate(item.user.created_at) }}</dd>
           <dd class="font-medium text-gray-900">Status Pesanan : {{ item.order_status }}</dd>

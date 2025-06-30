@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import AuthenticatedLayout from "../Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { onMounted, onUnmounted, ref } from "vue";
 
@@ -10,7 +10,7 @@ let observer: IntersectionObserver | null = null;
 onMounted(() => {
   const elements = document.querySelectorAll(".animate-on-scroll");
 
-  // Pastikan ada elemen yang akan diobservasi sebelum membuat instance
+  // Pastikan ada elemen yang akan diobservasi sebelum membuat instancex
   if (elements.length > 0) {
     observer = new IntersectionObserver(
       (entries) => {
@@ -68,8 +68,8 @@ onUnmounted(() => {
           playsinline
           class="absolute inset-0 w-full h-full object-cover opacity-70"
           aria-hidden="true"
-        >
-          <source src="/img/background.mp4" type="video/mp4" />
+      >
+          <source src="/img/rasahaka-vid.mp4" type="video/mp4" />
           Browser Anda tidak mendukung tag video.
         </video>
         <div class="relative z-20 text-center px-4 sm:px-6">

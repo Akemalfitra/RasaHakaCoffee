@@ -9,51 +9,14 @@ use App\Models\OrderItems;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use Midtrans\CoreApi;
-use Midtrans\Config;
-
 class OrderController extends Controller
 {
-    public function __construct()
-    {
-        Config::$serverKey = config('services.midtrans.server_key');
-        Config::$isProduction = config('services.midtrans.is_production');
-        Config::$isSanitized = true;
-        Config::$is3ds = true;
-    }
-
     public function store(Request $request) {
         
-        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$isSanitized = true;
-        \Midtrans\Config::$is3ds = true;
-
-        $orderId = uniqid('order_');
-        $harga = $request->input('jumlah'); // Ambil harga dari inputan jumlah
-
-        $params = [
-            'transaction_details' => [
-                'order_id' => rand(),
-                'gross_amount' => $harga, // nominal pembayaran
-            ],
-            'customer_details' => [
-                'first_name' => 'namee',
-                'email' => 'user@gmail.com',
-            ],
-        ];
-        
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-
         $order = Orders::create([
             'user_id' => $request->input('userId'),
-            'total_price' => $params['transaction_details']['gross_amount'], 
-            'total_harga' => $params['transaction_details']['gross_amount'], 
-            'order_status' => 'pending',
-            'payment_type' => 'midtrans',
-            'payment_token' => $params['transaction_details']['order_id'],
-            'snap_url' => $snapToken,
-            'refund_status' => '',
+            'nama_pemesan' => $request->input('atas_nama'),
+            'total_harga' => $request->input('jumlah') 
         ]);
 
         foreach ($request->input("cart") as $item) {
@@ -65,8 +28,6 @@ class OrderController extends Controller
                 'harga' => $item['harga'],
             ]);
         }
-
-        return response()->json(['token' => $snapToken]);
     }
     
     public function getPesanan() {
