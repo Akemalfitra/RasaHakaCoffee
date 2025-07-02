@@ -10,7 +10,14 @@ import { Head, Link } from '@inertiajs/vue3'; // Menambahkan Link untuk tombol
   <AuthenticatedLayout>
     <template #header>
         <div>
-            <a href="#" class="text-2xl font-bold text-yellow-600"> Rasahaka </a>
+            <a 
+              href="https://maps.app.goo.gl/FnULipc9ur58uZKv9" 
+              class="text-2xl font-bold text-yellow-600" 
+              target="_blank" 
+              rel="noopener"
+            >
+              Rasahaka
+            </a>
             <address class="mt-2 not-italic">Takengon, Aceh Indonesia.</address>
         </div>
     </template>

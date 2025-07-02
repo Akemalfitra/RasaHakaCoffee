@@ -45,7 +45,9 @@ onUnmounted(() => {
     <template #header>
       <header class="container mx-auto px-4 py-6 flex flex-col items-center sm:items-start">
         <a
-          href="/"
+          href="https://maps.app.goo.gl/FnULipc9ur58uZKv9"
+          target="_blank"
+          rel="noopener"
           class="text-3xl sm:text-4xl font-serif font-bold text-amber-800 tracking-tight hover:text-amber-900 transition-colors duration-300"
           aria-label="RasaHaka Coffee Home"
         >
@@ -169,7 +171,7 @@ onUnmounted(() => {
                 yang kaya, menghadirkan rasa manis lembut dengan aroma menggoda.
               </p>
               <a
-                href="/produk/spanish-choco"
+                href="/user-menu"
                 class="block mt-auto px-6 py-3 bg-amber-600 text-cream-50 font-semibold rounded-lg hover:bg-amber-700 hover:scale-105 transition-all duration-300 w-fit"
                 aria-label="Pesan kopi Spanish Choco"
               >
@@ -192,7 +194,7 @@ onUnmounted(() => {
                 menawarkan cita rasa asam manis yang menyegarkan dan unik.
               </p>
               <a
-                href="/produk/spanish-berry"
+                href="/user-menu"
                 class="block mt-auto px-6 py-3 bg-amber-600 text-cream-50 font-semibold rounded-lg hover:bg-amber-700 hover:scale-105 transition-all duration-300 w-fit"
                 aria-label="Pesan kopi Spanish Berry"
               >

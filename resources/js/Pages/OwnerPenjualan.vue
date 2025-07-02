@@ -7,19 +7,20 @@ const props = defineProps({
     pesanan: Array
 });
 
-// State filter
+// State for filters
 const filterNama = ref('');
 const filterStatus = ref('');
 const filterTanggalMulai = ref('');
 const filterTanggalSelesai = ref('');
 
+// Filtered orders based on user selections
 const filteredPesanan = computed(() => {
     return props.pesanan.filter(item => {
         const matchNama = item.nama_pemesan.toLowerCase().includes(filterNama.value.toLowerCase());
         const matchStatus = filterStatus.value === '' || item.order_status === filterStatus.value;
         
-        // Filter tanggal
-        const tanggalPesanan = new Date(item.user.created_at);
+        // Filter by order creation date
+        const tanggalPesanan = new Date(item.created_at);
         const matchTanggalMulai = filterTanggalMulai.value === '' || 
                                 tanggalPesanan >= new Date(filterTanggalMulai.value);
         const matchTanggalSelesai = filterTanggalSelesai.value === '' || 
@@ -29,18 +30,27 @@ const filteredPesanan = computed(() => {
     });
 });
 
+// Calculate total revenue from filtered orders
+const totalRevenue = computed(() => {
+    return filteredPesanan.value.reduce((sum, item) => sum + Number(item.total_harga), 0);
+});
+
+// Function to handle printing
 function cetakPDF() {
-    // Sembunyikan navbar dan elemen lain sebelum print
+    // Hide non-print elements
     const navbar = document.querySelector('nav');
     const header = document.querySelector('header');
     if (navbar) navbar.style.display = 'none';
     if (header) header.style.display = 'none';
     
-    // Tampilkan judul print
+    // Show print-specific elements
     const printTitle = document.querySelector('.print-title');
-    if (printTitle) printTitle.style.display = 'block';
+    const printTotalRevenueElement = document.querySelector('.print-total-revenue'); // Get the total revenue element for print
     
-    // Update judul dengan range tanggal jika ada filter
+    if (printTitle) printTitle.style.display = 'block';
+    if (printTotalRevenueElement) printTotalRevenueElement.style.display = 'block'; // Show total revenue for print
+    
+    // Update print title with date range
     const dateRangeText = document.querySelector('.date-range-text');
     if (dateRangeText) {
         if (filterTanggalMulai.value && filterTanggalSelesai.value) {
@@ -54,18 +64,21 @@ function cetakPDF() {
         }
     }
     
+    // Wait briefly for display changes, then print
     setTimeout(() => {
         window.print();
         
-        // Kembalikan seperti semula setelah print
+        // Restore hidden elements after printing
         setTimeout(() => {
             if (navbar) navbar.style.display = '';
             if (header) header.style.display = '';
             if (printTitle) printTitle.style.display = 'none';
+            if (printTotalRevenueElement) printTotalRevenueElement.style.display = 'none'; // Hide total revenue after print
         }, 500);
     }, 200);
 }
 
+// Helper to format dates
 function formatTanggal(tanggal) {
     return new Date(tanggal).toLocaleDateString('id-ID', {
         day: '2-digit',
@@ -74,6 +87,7 @@ function formatTanggal(tanggal) {
     });
 }
 
+// Reset date filters
 function resetFilterTanggal() {
     filterTanggalMulai.value = '';
     filterTanggalSelesai.value = '';
@@ -83,7 +97,6 @@ function resetFilterTanggal() {
 <template>
     <Head title="Pesanan pelanggan" />
 
-    <!-- Judul khusus untuk print (awalnya disembunyikan) -->
     <div class="print-title hidden">
         <h1 class="text-2xl font-bold text-center">Laporan Penjualan RasaHaka Coffee</h1>
         <p class="text-gray-600 text-center date-range-text">Periode: {{ 
@@ -104,7 +117,6 @@ function resetFilterTanggal() {
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <!-- Filter (disembunyikan saat print) -->
                 <div class="flex flex-col gap-4 mb-6 no-print">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -118,8 +130,10 @@ function resetFilterTanggal() {
                                 <select v-model="filterStatus" class="border rounded px-3 pr-8 py-2 w-full sm:w-auto">
                                     <option value="">Semua Status</option>
                                     <option value="pending">Pending</option>
-                                    <option value="proses">Proses</option>
-                                    <option value="selesai">Selesai</option>
+                                    <option value="Dibatalkan pembeli">Dibatalkan Pembeli</option>
+                                    <option value="Dibatalkan penjual">Dibatalkan Penjual (Admin)</option>
+                                    <option value="Pesanan diproses">Proses</option>
+                                    <option value="Pesanan selesai">Selesai</option>
                                 </select>
                             </div>
                             <button
@@ -131,7 +145,6 @@ function resetFilterTanggal() {
                         </div>
                     </div>
                     
-                    <!-- Filter Tanggal -->
                     <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
                         <div class="flex items-center gap-2">
                             <label for="tanggalMulai" class="whitespace-nowrap">Dari Tanggal:</label>
@@ -160,7 +173,6 @@ function resetFilterTanggal() {
                     </div>
                 </div>
                 
-                <!-- Tabel -->
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <table class="w-full divide-y divide-gray-200">
@@ -185,9 +197,9 @@ function resetFilterTanggal() {
                                     <td class="px-4 py-4 font-medium text-gray-900">{{ item.nama_pemesan }}</td>
                                     <td class="px-4 py-4 font-medium text-gray-900">{{ item.user.name }}</td>
                                     <td class="px-4 py-4 font-medium text-gray-900">{{ item.user.email }}</td>
-                                    <td class="px-4 py-4 font-medium text-gray-900">{{ new Date(item.user.created_at).toLocaleDateString('id-ID') }}</td>
+                                    <td class="px-4 py-4 font-medium text-gray-900">{{ new Date(item.created_at).toLocaleDateString('id-ID') }}</td>
                                     <td class="px-4 py-4 font-medium text-gray-900">
-                                        {{ new Date(item.user.created_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) }} WIB
+                                        {{ new Date(item.created_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) }} WIB
                                     </td>
                                     <td class="px-4 py-4 font-medium text-gray-900">{{ item.order_status }}</td>
                                     <td class="px-4 py-4 font-medium text-gray-900">
@@ -196,38 +208,59 @@ function resetFilterTanggal() {
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="mt-4 p-4 bg-gray-50 border-t border-gray-200 text-right no-print">
+                            <strong class="text-lg text-gray-900">Total Pendapatan</strong>
+                            <span class="text-lg text-gray-900 ml-2">Rp {{ totalRevenue.toLocaleString('id-ID') }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="print-total-revenue hidden text-right mt-4 mr-8">
+            <strong class="text-lg text-gray-900">Total Pendapatan:</strong>
+            <span class="text-lg text-gray-900 ml-2">Rp {{ totalRevenue.toLocaleString('id-ID') }}</span>
         </div>
     </AuthenticatedLayout>
 </template>
 
 <style>
-/* Style untuk menyembunyikan elemen saat print */
+/* Styles for print media */
 @media print {
+    /* Hide all elements by default */
     body * {
         visibility: hidden;
         margin: 0;
         padding: 0;
     }
     
-    /* Tampilkan hanya elemen yang diperlukan */
+    /* Make necessary print elements visible */
     .print-title,
     .print-title *,
+    .print-total-revenue,
     table, 
-    table * {
+    table *,
+    tbody, /* Ensure tbody is visible for printing */
+    thead /* Ensure thead is visible for printing */
+    {
         visibility: visible;
     }
     
-    /* Style judul print */
+    /* Specific styles for print title */
     .print-title {
         display: block !important;
         text-align: center;
         margin-bottom: 20px;
     }
+
+    /* Specific styles for print total revenue */
+    .print-total-revenue {
+        display: block !important;
+        text-align: right;
+        margin-top: 20px;
+        margin-right: 10mm; /* Adjust margin for print */
+    }
     
-    /* Style tabel untuk print */
+    /* Table styles for print */
     table {
         width: 100% !important;
         border-collapse: collapse;
@@ -242,24 +275,24 @@ function resetFilterTanggal() {
     
     th {
         background-color: #f5f5f5 !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact; /* Ensures background color prints */
+        print-color-adjust: exact; /* Ensures background color prints */
     }
     
-    /* Atur margin halaman */
+    /* Page margins for printing */
     @page {
         size: auto;
         margin: 10mm;
     }
     
-    /* Hilangkan semua elemen yang tidak perlu */
+    /* Hide specific elements that shouldn't appear in print */
     .no-print,
     nav,
     header {
         display: none !important;
     }
     
-    /* Pastikan tabel tidak terpotong antar halaman */
+    /* Prevent table rows from breaking across pages */
     table {
         page-break-inside: auto;
     }
@@ -269,25 +302,26 @@ function resetFilterTanggal() {
         page-break-after: auto;
     }
     
-    /* Reset padding dan margin */
+    /* Reset body padding and margin for print */
     body {
         padding: 0 !important;
         margin: 0 !important;
     }
     
-    /* Hilangkan efek shadow dan rounded corner */
+    /* Remove shadow and rounded corners for print */
     .shadow-sm, .sm\:rounded-lg {
         box-shadow: none !important;
         border-radius: 0 !important;
     }
 }
 
-/* Sembunyikan judul print saat tampilan normal */
-.print-title {
+/* Hide print-specific elements in normal browser view */
+.print-title,
+.print-total-revenue {
     display: none;
 }
 
-/* Responsive design untuk filter */
+/* Responsive design for filters */
 @media (max-width: 640px) {
     .flex-col.sm\:flex-row {
         flex-direction: column;
