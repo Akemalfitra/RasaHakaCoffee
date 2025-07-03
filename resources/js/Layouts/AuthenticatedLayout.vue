@@ -22,14 +22,14 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')">
+                                <a href="https://maps.app.goo.gl/FnULipc9ur58uZKv9" target="_blank" rel="noopener">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800"
                                     />
-                                </Link>
-                                <Link :href="route('dashboard')" class="ml-3">
+                                </a>
+                                <a href="https://maps.app.goo.gl/FnULipc9ur58uZKv9" class="ml-3" target="_blank" rel="noopener">
                                     RasaHaKa
-                                </Link>
+                                </a>
                             </div>
 
                             <!-- Navigation Links -->
