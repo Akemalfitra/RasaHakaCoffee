@@ -32,7 +32,14 @@ const filteredPesanan = computed(() => {
 
 // Calculate total revenue from filtered orders
 const totalRevenue = computed(() => {
-    return filteredPesanan.value.reduce((sum, item) => sum + Number(item.total_harga), 0);
+
+    return filteredPesanan.value.reduce((sum, item) => {
+        // Hanya tambahkan ke total jika status pesanan bukan 'Dibatalkan pembeli' atau 'Dibatalkan penjual'
+        if (item.order_status !== 'Dibatalkan pembeli' && item.order_status !== 'Dibatalkan penjual') {
+            return sum + Number(item.total_harga);
+        }
+        return sum;
+    }, 0);
 });
 
 // Function to handle printing
